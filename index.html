@@ -5,7 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Lore da Academia Aethel</title>
 <style>
-  *, *::before, *::after { box-sizing: border-box; }
+  /* Reset */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
   body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -13,13 +16,14 @@
     color: #eee;
     line-height: 1.5;
     display: flex;
+    min-height: 100vh;
   }
 
   /* Barra lateral */
   .sidebar {
     position: fixed;
     top: 0; left: 0;
-    width: 70px; height: 100%;
+    width: 70px; height: 100vh;
     background: linear-gradient(180deg, #1a1a1a, #141414);
     border-right: 2px solid #550000aa;
     display: flex;
@@ -40,7 +44,11 @@
   }
   .sidebar button:hover {
     color: #fff;
-    transform: scale(1.2);
+    transform: scale(1.3);
+  }
+  .sidebar button.active {
+    color: #44ff44;
+    transform: scale(1.4);
   }
   .sidebar button::after {
     content: attr(title);
@@ -74,12 +82,11 @@
   }
 
   main {
-    max-width: 900px;
-    margin: 5rem auto 3rem;
-    background: #222;
+    margin-left: 70px;
+    margin-top: 5rem;
     padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 0 25px #440000cc;
+    flex-grow: 1;
+    max-width: 900px;
   }
 
   nav {
@@ -114,7 +121,9 @@
     display: none;
     animation: fadeIn 0.5s ease forwards;
   }
-  section.active { display: block; }
+  section.active {
+    display: block;
+  }
 
   /* Toriel - fundo verde */
   .toriel {
@@ -133,10 +142,23 @@
     color: #bbffbb;
   }
 
-  h1, h2, h3 { color: #ff6666; text-shadow: 0 0 6px #660000aa; }
-  hr { border: none; height: 1px; background: #550000aa; margin: 1.5rem 0; }
-  ul { margin-left: 1.2rem; margin-bottom: 1.5rem; }
-  p { margin-bottom: 1rem; }
+  h1, h2, h3 {
+    color: #ff6666;
+    text-shadow: 0 0 6px #660000aa;
+  }
+  hr {
+    border: none;
+    height: 1px;
+    background: #550000aa;
+    margin: 1.5rem 0;
+  }
+  ul {
+    margin-left: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+  p {
+    margin-bottom: 1rem;
+  }
   blockquote {
     border-left: 4px solid #ff4444;
     margin: 1rem 0 1.5rem 0;
@@ -144,42 +166,192 @@
     font-style: italic;
     color: #ff9999;
   }
-  ::-webkit-scrollbar { width: 10px; }
-  ::-webkit-scrollbar-track { background: #1a1a1a; }
-  ::-webkit-scrollbar-thumb { background: #660000; border-radius: 5px; }
-  @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+
+  /* Scrollbar custom */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #1a1a1a;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #660000;
+    border-radius: 5px;
+  }
+
+  @keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+
+  /* Responsivo */
+  @media (max-width: 480px) {
+    nav {
+      gap: 0.5rem;
+    }
+    nav button {
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+    }
+    .sidebar {
+      width: 50px;
+    }
+    .sidebar button {
+      font-size: 1.5rem;
+    }
+    header {
+      left: 50px;
+    }
+    main {
+      margin-left: 50px;
+      padding: 1rem;
+    }
+  }
 </style>
 </head>
 <body>
 
 <!-- Barra lateral -->
-<div class="sidebar">
-  <button class="char-btn" data-tab="toriel" title="Toriel Lionheart">👤</button>
+<div class="sidebar" role="navigation" aria-label="Menu lateral de personagens">
+  <button class="sidebar-btn active" data-tab="arco1" title="Arco 1 – Traição">🌑</button>
+  <button class="sidebar-btn" data-tab="arco2" title="Arco 2 – Quimeras">🩸</button>
+  <button class="sidebar-btn" data-tab="arco3" title="Arco 3 – Jogos de Inverno">❄️</button>
+  <button class="sidebar-btn" data-tab="toriel" title="Personagem: Toriel Lionheart">👤</button>
 </div>
 
 <header>Lore da Academia Aethel</header>
 
 <main>
+  <!-- Nav secundário (arcos) -->
   <nav>
     <button class="tab-btn active" data-tab="arco1">🌑 Arco 1 – Traição</button>
     <button class="tab-btn" data-tab="arco2">🩸 Arco 2 – Quimeras</button>
     <button class="tab-btn" data-tab="arco3">❄️ Arco 3 – Jogos de Inverno</button>
   </nav>
 
-  <section id="arco1" class="active" tabindex="0">
-    <!-- conteúdo dos arcos -->
+  <!-- Conteúdo dos Arcos -->
+  <section id="arco1" tabindex="0" class="active" aria-label="Conteúdo do Arco 1">
+    <h1>🌑 Arco 1 – Traição</h1>
+    <h3>Introdução:</h3>
+    <p>Os personagens são alunos recém-chegados à Academia Aethel, onde acabam se conhecendo ao seguir um misterioso tentáculo negro nos corredores da escola.</p>
+
+    <h3>Eventos principais:</h3>
+    <ul>
+      <li>O tentáculo os leva até a sala do reitor, onde testemunham Izack matando o Reitor de Aethel.</li>
+      <li>Izack desaparece, e os alunos são pegos ao lado do corpo. Toda a academia os vê como culpados.</li>
+      <li>Eles fogem e tornam-se procurados pelo reino.</li>
+      <li>Refugiam-se na cidade de Fausto, mas descobrem que é uma ilusão construída por Izack — um estômago mágico que consome pessoas através do medo, corpo e alma.</li>
+      <li>Escapam de Fausto, mas são interceptados pelo General Francesco Lionheart, tio de Toriel, que tenta prendê-los.</li>
+      <li>A Legião Abissal aparece (Homem Pálido, Cirurgião, Homem do Elmo), provocando uma batalha caótica.</li>
+      <li>Elise, uma integrante da Legião, salva os jogadores e os leva até um laboratório subterrâneo.</li>
+    </ul>
   </section>
 
-  <section id="arco2" tabindex="0">
-    <!-- conteúdo dos arcos -->
+  <section id="arco2" tabindex="0" aria-label="Conteúdo do Arco 2">
+    <h1>🩸 Arco 2 – Quimeras, Experimentos e Verdades Escondidas</h1>
+
+    <h3>Protocolo da Dor & Evangelho da Última Quimera:</h3>
+    <ul>
+      <li>No esconderijo, os jogadores veem experimentos grotescos: transformações humanas em quimeras.</li>
+      <li>São derrotados e acordam pendurados em uma sala viva, cercada de carne pulsante e embriões.</li>
+      <li>Descobrem que Kaguya foi alvo de experimentos para fundi-la com a espada Chiketsu Kotsuken.</li>
+      <li>Kaguya invade o laboratório e sela um pacto sangrento com a espada.</li>
+    </ul>
+
+    <h3>Luta feroz contra a Legião:</h3>
+    <ul>
+      <li>Kaguya mata o Homem do Elmo com seus espinhos.</li>
+      <li>Zarkov derrota os Irmãos Amaldiçoados.</li>
+      <li>Mahrez corta as mãos do Cirurgião, que foge.</li>
+    </ul>
+
+    <p>Elise se rebela contra Izack, mas já é tarde: o apóstolo Jazida, um abissal puro, desperta e a mata absorvendo sua alma.</p>
+
+    <p>Os heróis escapam por uma distorção e acordam em uma versão passada da própria Aethel.</p>
+
+    <p>Percebem que estão nos corpos de seus ancestrais.</p>
   </section>
 
-  <section id="arco3" tabindex="0">
-    <!-- conteúdo dos arcos -->
+  <section id="arco3" tabindex="0" aria-label="Conteúdo do Arco 3">
+    <h1>❄️ Arco 3 – Jogos de Inverno</h1>
+
+    <h3>Sessão 1 – Boas-Vindas aos Condenados</h3>
+
+    <p><strong>➤ Parte 1: A Jornada à Arábia</strong></p>
+    <p>O grupo, após reunir os heróis restantes Arabella e Eleonor, é enviado com urgência para a Arábia, terra natal de Mahrez, agora tomada por guardas corrompidos.</p>
+    <p>Descobrem que os soldados de elite são quimeras de lodo, camufladas com armaduras cerimoniais.</p>
+    <p>Após derrotá-los, descobrem uma arena ritualística no centro da cidade — que, assim como Fausto, é na verdade um estômago abissal disfarçado.</p>
+
+    <p><strong>➤ Parte 2: O Ritual da Arena</strong></p>
+    <p>Por tradição local, qualquer estrangeiro que pisa na arena deve lutar em combate ritualístico.</p>
+    <p>Cada jogador enfrenta uma criatura ou campeão:</p>
+    <ul>
+      <li>Arabella e Eleonor vencem facilmente.</li>
+      <li>Zarkov sofre, mas triunfa.</li>
+      <li>Kaguya vence por pouco.</li>
+      <li>Toriel, surpreendentemente, derrota um dragão gigante.</li>
+      <li>Elisya aparentemente morre… mas se levanta misteriosamente.</li>
+      <li>Mahrez enfrenta uma criatura poderosa, mas no final vê Izack observando do alto da arena.</li>
+    </ul>
+
+    <p><strong>➤ Parte 3: A Última Quimera</strong></p>
+    <p>Izack ativa o verdadeiro propósito da arena: invocar a Última Quimera, um cardeal demoníaco com chifres, tridente e múltiplas vozes suplicando por perdão.</p>
+    <p>Uma luta brutal se segue. A criatura é derrotada.</p>
+    <p>Ao final, uma tumba de areia emerge do chão, com uma urna ritualística que suga Mahrez para dentro.</p>
+
+    <p><strong>➤ Parte 4: Nakhir e o Destino de Mahrez</strong></p>
+    <blockquote>“Agora teu sopro pertence à eternidade.”</blockquote>
+    <p>Mahrez retorna com seus pulmões substituídos por areia viva — punição permanente por sua sanidade corrompida.</p>
+
+    <hr>
+
+    <h3>Sessão 2 – Boas-Vindas aos Condenados (continuação)</h3>
+    <p>Mahrez e o grupo seguem para encontrar o pai dele, mas o encontram possuído pela entidade "O Príncipe".</p>
+    <p>O Príncipe os desafia para um jogo macabro de Verdade ou Desafio, com testes que drenam sanidade.</p>
+    <p>Após vencerem o jogo, Nakhir força Mahrez a comer o coração do pai como rito final.</p>
+    <p>Uma luta violenta acontece — Mahrez confronta o próprio pai possuído.</p>
+    <p>Ao fim, vencem a entidade.</p>
+
+    <p><strong>➤ Retorno a Aethel</strong></p>
+    <p>O grupo encontra um convite misterioso para retornar a Aethel.</p>
+    <p>Usam uniformes falsos da academia Bayat al Nar para entrar disfarçados como alunos de intercâmbio.</p>
+    <p>Toriel gasta toda sua mana para abrir um portal até Belém, onde Aethel está localizada.</p>
+    <p>Hospedam-se em uma taverna.</p>
+    <p>No dia seguinte, correm até Aethel para a cerimônia de boas-vindas.</p>
+    <p>Encontram Izack como o novo Reitor, ao lado da Trupe dos Sete Espinhos.</p>
+
+    <blockquote>Izack, sorrindo diante da multidão, ergue um papel e diz: “Boas-vindas... a todos.” (Fim da sessão)</blockquote>
+
+    <hr>
+
+    <h3>Sessão 3 – Luta de Egos</h3>
+    <ul>
+      <li>Discurso oficial de Izack.</li>
+      <li>Sarthan, líder da Trupe, faz o discurso explicando os Jogos de Inverno.</li>
+      <li>Tensão entre Toriel e Sarthan — revelado que ele é noivo da irmã de Toriel.</li>
+      <li>Arabella discute com Sarthan e entra em atrito com Kaguya.</li>
+      <li>Ao final, recebem um panfleto explicando a Semana da Sabedoria — terão 1 mês para se preparar.</li>
+      <li>Kaguya, dominada pela espada, ataca os aliados, sugando sangue.</li>
+      <li>Elisya é tomada pelo Grimório. Zarkov entra em fúria.</li>
+      <li>Mahrez é possuído por Nakhir — luta brutal contra Arabella e Kaguya, que o derrota perfurando seu olho esquerdo (trauma permanente).</li>
+      <li>O grupo volta para a taverna. Tensão entre Mahrez e Arabella.</li>
+    </ul>
+
+    <p><strong>➤ Parte 4: Nakhir e o Destino de Mahrez</strong></p>
+    <blockquote>“Agora teu sopro pertence à eternidade.”</blockquote>
+    <p>Mahrez retorna com seus pulmões substituídos por areia viva — punição permanente por sua sanidade corrompida.</p>
+
+    <hr>
+
+    <p>No dia seguinte, recebem panfletos com atividades da Semana da Sabedoria, conhecem os quartos e colegas.</p>
+    <p>Arabella e Kaguya veem uma goblin criança saindo da biblioteca trancada, dizendo:</p>
+    <blockquote>“A carne da biblioteca ainda respira... Os livros sussurram nomes. Mas não os leia em voz alta... senão eles descem da prateleira... e não voltam sozinhos.”</blockquote>
+
+    <p>(Fim da sessão)</p>
   </section>
 
-  <!-- Ficha Toriel -->
-  <section id="toriel" class="toriel" tabindex="0">
+  <!-- Personagem Toriel -->
+  <section id="toriel" tabindex="0" class="toriel" aria-label="Ficha do personagem Toriel Lionheart">
     <h1>Toriel Lionheart — Lore Completa</h1>
 
     <h3>Origem e Família</h3>
@@ -188,60 +360,67 @@
     <h3>Personalidade e Aparência</h3>
     <p>Magro, frágil e de saúde delicada, Toriel é <em>medroso, provocador e sarcástico</em>. Usa ironia como escudo contra a insegurança, o que o torna impopular e isolado.</p>
 
-    <h3>O Incidente e a Queda</h3>
-    <p>Acusado injustamente de participar do assassinato do reitor da <strong>Academia Aethel</strong>, fugiu com Mahrez, Elisya e Kaguya. Tornou-se um fugitivo e vergonha para sua família.</p>
+    <h3>O Incidente e a Fuga</h3>
+    <p>Acusado injustamente, junto com Mahrez, Elisya e Kaguya, do assassinato do Reitor da Academia Aethel, Toriel precisou fugir. Atualmente, vive como um fugitivo, perseguido por agentes reais e por inimigos misteriosos.</p>
 
-    <h3>A Espada Dragon Slayer</h3>
-    <p>Carrega a <strong>Dragon Slayer</strong>, arma lendária que ele maneja com maestria apenas quando está inconsciente. Nestes momentos, o poder da espada se liberta de forma devastadora.</p>
-
-    <h3>Curiosidades</h3>
+    <h3>Relacionamentos</h3>
     <ul>
-      <li><strong>Poder Latente:</strong> força brutal apenas em estado inconsciente.</li>
-      <li><strong>Trauma Psicológico:</strong> crises de pânico desde pequeno.</li>
-      <li><strong>Relação com Irmãos:</strong> desprezo de Melchior, pena de Cassandra.</li>
-      <li><strong>Maldição da Espada:</strong> drena energia vital se não houver equilíbrio emocional.</li>
-      <li><strong>Hábito Noturno:</strong> escreve cartas não enviadas à família.</li>
-      <li><strong>Símbolo:</strong> leão alado no brasão, mas rabisca dragões em cadernos.</li>
+      <li><strong>Melchior Lionheart:</strong> Irmão mais velho, herdeiro direto do trono, orgulhoso e implacável.</li>
+      <li><strong>Cassandra Lionheart:</strong> Irmã mais nova, ligada aos círculos políticos da corte.</li>
+      <li><strong>General Francesco Lionheart:</strong> Tio severo, caçador dos fugitivos.</li>
     </ul>
 
-    <h3>A Verdade Oculta — O Preço da Dragon Slayer</h3>
-    <p>Toriel fez um pacto com o <strong>Carcereiro das Almas</strong>. Cada uso total da espada arranca parte de sua humanidade, deixando-o frio e apático.</p>
-
-    <blockquote>“Cada golpe é um pedaço de mim que se perde no vazio.”</blockquote>
-
-    <h3>Consequências Sinistras</h3>
+    <h3>Habilidades</h3>
     <ul>
-      <li>Perda de memória por horas ou dias.</li>
-      <li>Olhos negros após desmaios.</li>
-      <li>Fome insaciável e inexplicável.</li>
-      <li>Objetos próximos à espada corroem ou congelam durante seu uso.</li>
+      <li>Domínio de magia defensiva e ilusória.</li>
+      <li>Conhecimento profundo em história da Academia Aethel.</li>
+      <li>Capacidade de infiltração e fuga.</li>
     </ul>
+
+    <h3>Citações Marcantes</h3>
+    <blockquote>“Melhor ser um cão ferido do que um leão morto.”</blockquote>
+    <blockquote>“A traição é apenas um jogo para quem sabe as regras.”</blockquote>
   </section>
+
 </main>
 
 <script>
-  const buttons = document.querySelectorAll('nav button');
+  // Seleção dos botões da sidebar e nav
+  const sidebarBtns = document.querySelectorAll('.sidebar-btn');
+  const tabBtns = document.querySelectorAll('nav .tab-btn');
   const sections = document.querySelectorAll('main section');
-  const charBtns = document.querySelectorAll('.char-btn');
 
-  function showTab(tabId) {
-    sections.forEach(s => s.classList.remove('active'));
-    document.getElementById(tabId).classList.add('active');
-    document.getElementById(tabId).focus();
-    buttons.forEach(b => b.classList.remove('active'));
+  function ativarAba(tab) {
+    // Remove active dos botões sidebar e nav
+    sidebarBtns.forEach(btn => btn.classList.remove('active'));
+    tabBtns.forEach(btn => btn.classList.remove('active'));
+    // Remove active das seções
+    sections.forEach(sec => sec.classList.remove('active'));
+
+    // Ativa botão sidebar que tenha data-tab = tab
+    const sidebarBtn = [...sidebarBtns].find(b => b.dataset.tab === tab);
+    if (sidebarBtn) sidebarBtn.classList.add('active');
+
+    // Ativa botão nav (se existir)
+    const navBtn = [...tabBtns].find(b => b.dataset.tab === tab);
+    if (navBtn) navBtn.classList.add('active');
+
+    // Ativa a seção
+    const sec = document.getElementById(tab);
+    if (sec) sec.classList.add('active');
   }
 
-  buttons.forEach(btn => {
+  // Clique nos botões da sidebar
+  sidebarBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      if(btn.classList.contains('active')) return;
-      btn.classList.add('active');
-      showTab(btn.dataset.tab);
+      ativarAba(btn.dataset.tab);
     });
   });
 
-  charBtns.forEach(btn => {
+  // Clique nos botões da nav (arcos)
+  tabBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      showTab(btn.dataset.tab);
+      ativarAba(btn.dataset.tab);
     });
   });
 </script>
