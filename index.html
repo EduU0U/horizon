@@ -411,52 +411,27 @@
 
   <section id="arco2" tabindex="0" aria-label="Conteúdo do Arco 2">
     <h1>🩸 Arco 2 – Quimeras, Experimentos e Verdades Escondidas</h1>
-    <!-- conteúdo omitido para brevidade -->
+    <p>Detalhes e eventos do segundo arco da campanha (ainda a completar)...</p>
   </section>
 
   <section id="arco3" tabindex="0" aria-label="Conteúdo do Arco 3">
     <h1>❄️ Arco 3 – Jogos de Inverno</h1>
-    <!-- conteúdo omitido para brevidade -->
+    <p>Detalhes e eventos do terceiro arco da campanha (ainda a completar)...</p>
   </section>
 
-  <!-- Seção exclusiva: Toriel -->
-  <section id="toriel" tabindex="0" class="toriel" aria-label="Ficha e história do personagem Toriel Lionheart" style="display:none;">
+  <!-- Toriel Lionheart -->
+  <section id="toriel" class="toriel" tabindex="0" aria-label="Biografia da personagem Toriel Lionheart">
     <h1>👤 Toriel Lionheart</h1>
-    <img src="https://i.imgur.com/tXajPY6.png" alt="Imagem do personagem Toriel Lionheart" class="toriel-img" />
-    <h3>Informações básicas</h3>
-    <ul>
-      <li>Nome completo: Toriel Lionheart</li>
-      <li>Nascimento: 6 de janeiro de 1483</li>
-      <li>Filiação: Filho do rei Lucius V Lionheart</li>
-      <li>Posição na família: Terceiro na linhagem do trono, irmão do príncipe herdeiro Melchior Lionheart e da princesa Cassandra Lionheart</li>
-            <li>Status: Acusado injustamente de assassinar o reitor junto com Mahrez, Elisya e Kaguya</li>
-    </ul>
-
-    <h3>História</h3>
-    <p>Toriel Lionheart nasceu em um reino próspero, filho de uma dinastia real marcada por intrigas e traições. Cresceu sob a sombra do irmão mais velho, o príncipe Melchior, herdeiro do trono, e da irmã Cassandra, conhecida por sua sagacidade e força.</p>
-    <p>Acusado injustamente pelo assassinato do reitor da Academia Aethel, Toriel foi forçado a fugir, buscando provar sua inocência enquanto lida com os perigos crescentes do mundo mágico e político ao seu redor.</p>
-
-    <h3>Características marcantes</h3>
-    <ul>
-      <li>Personalidade: Reservado, determinado e astuto.</li>
-      <li>Habilidades: Excelente espadachim e estrategista.</li>
-      <li>Traços físicos: Olhos verdes intensos, cabelos negros e uma cicatriz na sobrancelha direita.</li>
-    </ul>
-
-    <h3>Citações</h3>
-    <blockquote>"Nem toda luz brilha para todos. A verdade é uma espada que corta o silêncio da mentira."</blockquote>
-
-    <h3>Curiosidades</h3>
-    <ul>
-      <li>Toriel tem um vínculo misterioso com uma relíquia ancestral que pode mudar o curso da guerra.</li>
-      <li>Apesar de sua linhagem real, evita o contato direto com a corte para proteger aqueles que ama.</li>
-    </ul>
+    <img src="https://i.imgur.com/U2Rvq2H.png" alt="Imagem de Toriel Lionheart" class="toriel-img" />
+    <p>Toriel Lionheart nasceu em um reino próspero, filho de uma dinastia real marcada por intrigas e traições. Cresceu sob a sombra do irmão mais velho, o príncipe Melchior, herdeiro do trono. Desde jovem, Toriel mostrou uma determinação e inteligência incomuns, características que o levaram a ser estudioso das artes místicas e das políticas do reino.</p>
+    <p>Com o passar dos anos, Toriel tornou-se uma figura respeitada e temida, por seu senso de justiça rígido e sua habilidade com magia ancestral. Foi designado para proteger os segredos da Academia Aethel, além de investigar as forças obscuras que ameaçam o equilíbrio do reino.</p>
+    <blockquote>
+      "A verdade não se revela aos fracos de coração, mas aos que ousam enfrentar as trevas de frente."
+    </blockquote>
+    <p>Sua trajetória é marcada por alianças frágeis e batalhas silenciosas contra aqueles que querem corromper o mundo. Toriel carrega a esperança de restaurar a honra da dinastia Lionheart, mesmo que isso custe tudo o que ama.</p>
   </section>
-</main>
 
-<footer>
-  <p>© 2025 Lore da Academia Aethel — Todos os direitos reservados.</p>
-</footer>
+</main>
 
 <script>
   // Controle dos botões laterais esquerdos (arcos e Toriel)
@@ -471,11 +446,14 @@
     sections.forEach(sec => sec.classList.remove('active'));
 
     // Ativa os correspondentes
-    document.querySelector(.sidebar-btn[data-tab="${tabName}"]).classList.add('active');
-    const tabBtn = document.querySelector(.tab-btn[data-tab="${tabName}"]);
-    if(tabBtn) tabBtn.classList.add('active');
+    const sidebarBtn = document.querySelector(`.sidebar-btn[data-tab="${tabName}"]`);
+    if (sidebarBtn) sidebarBtn.classList.add('active');
+
+    const tabBtn = document.querySelector(`.tab-btn[data-tab="${tabName}"]`);
+    if (tabBtn) tabBtn.classList.add('active');
+
     const sec = document.getElementById(tabName);
-    if(sec) sec.classList.add('active');
+    if (sec) sec.classList.add('active');
   }
 
   sidebarButtons.forEach(btn => {
@@ -491,86 +469,85 @@
 
   // Controle dos botões laterais direitos (Lordes Demoníacos)
   const lordButtons = document.querySelectorAll('.lord-btn');
-  const lordSections = [];
 
-  // Criar elementos para as descrições dos lordes (se preferir, pode ser direto no HTML, mas assim fica dinâmico)
-  const main = document.querySelector('main');
+  // Dados dos Lordes Demoníacos
   const lordDescriptionsData = {
     malthazor: {
       title: "Mal'Thazor, o Espreitador da Carne",
-      content: 
+      content: `
         <p><strong>Domínio:</strong> Luxúria Sangrenta e Mutabilidade Corpórea</p>
         <p><strong>Símbolos:</strong> Garras entrelaçadas, olhos cerrados</p>
         <p><strong>Oferenda:</strong> Fragmentos de pele arrancados sob desejo intenso</p>
-      
+      `
     },
     vhoraketh: {
       title: "Vhor'Aketh, o Ceifador do Tempo Esquecido",
-      content: 
+      content: `
         <p><strong>Domínio:</strong> Entropia Temporal e Memória Corroída</p>
         <p><strong>Símbolos:</strong> Ampulheta quebrada, espiral invertida</p>
         <p><strong>Oferenda:</strong> Lembranças escritas e consumidas em velas negras</p>
-      
+      `
     },
     zennorkai: {
       title: "Zennor'Kai, o Riso Sepulcral",
-      content: 
+      content: `
         <p><strong>Domínio:</strong> Loucura, Paranoia e Comédia Cruel</p>
         <p><strong>Símbolos:</strong> Máscaras rachadas, moinhos de vento parados</p>
         <p><strong>Oferenda:</strong> Gargalhadas forçadas diante do próprio reflexo</p>
-      
+      `
     },
     liranach: {
       title: "Lir'Anach, o Lamento dos Lares",
-      content: 
+      content: `
         <p><strong>Domínio:</strong> Desespero Doméstico e Ruína Emocional</p>
         <p><strong>Símbolos:</strong> Bonecas partidas, janelas trancadas</p>
         <p><strong>Oferenda:</strong> Cartas de amor rasgadas e molhadas em lágrimas</p>
-      
+      `
     },
     ogrionthul: {
       title: "Ogrion'Thul, o Engolidor de Pactos",
-      content: 
+      content: `
         <p><strong>Domínio:</strong> Corrupção Mágica e Traição Arcana</p>
         <p><strong>Símbolos:</strong> Contratos manchados de sangue, pergaminhos devorados</p>
         <p><strong>Oferenda:</strong> Juramentos quebrados escritos com o próprio sangue</p>
-      
+      `
     },
     baelvureth: {
       title: "Bael'Vureth, o Chacô do Sopro Final",
-      content: 
+      content: `
         <p><strong>Domínio:</strong> Agonia Respiratória e Medo Terminal</p>
         <p><strong>Símbolos:</strong> Pulmões em chamas, sinos de bronze</p>
         <p><strong>Oferenda:</strong> O último suspiro de um moribundo</p>
-      
+      `
     },
     syranom: {
       title: "Syra'Nom, a Mãe das Correntes",
-      content: 
+      content: `
         <p><strong>Domínio:</strong> Escravidão Mental e Privação Sensorial</p>
         <p><strong>Símbolos:</strong> Algemas abertas, olhos vendados</p>
         <p><strong>Oferenda:</strong> Três dias de silêncio absoluto em cela escura</p>
-      
+      `
     },
     drethmur: {
       title: "Dreth'Mur, o Jantar dos Condenados",
-      content: 
+      content: `
         <p><strong>Domínio:</strong> Degradação Culinária e Canibalismo Rituálico</p>
         <p><strong>Símbolos:</strong> Talheres enferrujados, pratos vazios</p>
         <p><strong>Oferenda:</strong> Um banquete onde se coma da própria carne em delírio</p>
-      
+      `
     },
     kzzarun: {
       title: "Kz'Zarun, o Dente da Terra Subversa",
-      content: 
+      content: `
         <p><strong>Domínio:</strong> Putrefação Geológica e Tremores Hereges</p>
         <p><strong>Símbolos:</strong> Pedras sangrentas, mapas rasgados</p>
         <p><strong>Oferenda:</strong> Enterrar um espírito consciente sob sal negro e cinzas</p>
-      
+      `
     }
   };
 
-  // Criar container para as descrições (abaixo do conteúdo do main)
+  // Criar container para as descrições dos lordes (abaixo do conteúdo principal)
+  const main = document.querySelector('main');
   const lordContainer = document.createElement('section');
   lordContainer.id = "lordes-demoníacos";
   lordContainer.setAttribute('tabindex', '0');
@@ -580,13 +557,14 @@
   lordContainer.style.borderRadius = '12px';
   lordContainer.style.boxShadow = '0 0 15px #550000aa';
   lordContainer.style.marginBottom = '2rem';
+  lordContainer.style.color = '#ff6666';
 
-  // Conteúdo inicial do Lorde ativo
-  lordContainer.innerHTML = 
+  // Inicializa com Mal'Thazor
+  lordContainer.innerHTML = `
     <h1>💀 Nove Lordes Demoníacos</h1>
     <h2>${lordDescriptionsData.malthazor.title}</h2>
     ${lordDescriptionsData.malthazor.content}
-  ;
+  `;
   main.appendChild(lordContainer);
 
   // Função para atualizar descrição ao clicar no Lorde
@@ -599,18 +577,24 @@
       const key = btn.dataset.lord;
       const data = lordDescriptionsData[key];
       if(data) {
-        lordContainer.innerHTML = 
+        lordContainer.innerHTML = `
           <h1>💀 Nove Lordes Demoníacos</h1>
           <h2>${data.title}</h2>
           ${data.content}
-        ;
+        `;
         lordContainer.focus();
       }
     });
   });
 
-  // Inicializa ativando Arco 1
+  // Inicializa ativando Arco 1 e Mal'Thazor
   activateTab('arco1');
+  lordButtons[0].classList.add('active');
 </script>
+
+<footer>
+  Academia Aethel © 2025 — Todos os direitos reservados.
+</footer>
+
 </body>
 </html>
