@@ -14,7 +14,6 @@
     box-sizing: border-box;
   }
 
-  /* Fundo com textura sutil e cor base */
   body {
     margin: 0;
     background: 
@@ -28,7 +27,7 @@
   }
 
   /* Barra lateral esquerda */
-  .sidebar {
+  .sidebar-left {
     position: fixed;
     top: 0; left: 0;
     width: 70px; height: 100vh;
@@ -40,7 +39,7 @@
     padding-top: 1rem;
     z-index: 20;
   }
-  .sidebar button {
+  .sidebar-left button {
     background: none;
     border: none;
     color: #ff6666;
@@ -50,15 +49,15 @@
     transition: color 0.3s, transform 0.3s;
     position: relative;
   }
-  .sidebar button:hover {
+  .sidebar-left button:hover {
     color: #fff;
     transform: scale(1.3);
   }
-  .sidebar button.active {
+  .sidebar-left button.active {
     color: #44ff44;
     transform: scale(1.4);
   }
-  .sidebar button::after {
+  .sidebar-left button::after {
     content: attr(title);
     position: absolute;
     left: 60px;
@@ -75,646 +74,11 @@
     top: 50%;
     transform: translateY(-50%);
   }
-  .sidebar button:hover::after {
+  .sidebar-left button:hover::after {
     opacity: 1;
   }
 
-  /* Barra lateral direita - Lordes Demoníacos */
-  .sidebar-right {
-    position: fixed;
-    top: 0; right: 0;
-    width: 70px; height: 100vh;
-    background: linear-gradient(180deg, #1a1a1a, #141414);
-    border-left: 2px solid #550000aa;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 1rem;
-    z-index: 20;
-  }
-  .lord-btn {
-    background: none;
-    border: none;
-    margin: 0.7rem 0;
-    cursor: pointer;
-    transition: transform 0.3s, filter 0.3s;
-    width: 48px;
-    height: 48px;
-    padding: 4px;
-    border-radius: 8px;
-    filter: grayscale(0.7) brightness(0.7);
-    position: relative;
-  }
-  .lord-btn svg {
-    width: 100%;
-    height: 100%;
-    fill: #ff4444;
-    transition: fill 0.3s;
-  }
-  .lord-btn:hover {
-    filter: none;
-    transform: scale(1.3);
-  }
-  .lord-btn.active {
-    filter: none;
-    transform: scale(1.4);
-  }
-  .lord-btn.active svg {
-    fill: #44ff44;
-  }
-  .lord-btn[title]::after {
-    content: attr(title);
-    position: absolute;
-    right: 80px;
-    background: #1a1a1a;
-    padding: 0.3rem 0.6rem;
-    font-size: 0.85rem;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s;
-    border: 1px solid #550000aa;
-    border-radius: 4px;
-    box-shadow: 0 0 8px #550000aa;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  .lord-btn:hover::after {
-    opacity: 1;
-  }
-
-  /* Header fixo */
-  header {
-    position: fixed;
-    top: 0; left: 70px; right: 70px;
-    background: #1a1a1a;
-    padding: 1rem;
-    text-align: center;
-    font-size: 2rem;
-    font-weight: 700;
-    color: #ff4444;
-    text-shadow: 0 0 10px #aa0000;
-    font-family: 'Cinzel', serif;
-    z-index: 10;
-    user-select: none;
-  }
-
-  /* Main container */
-  main {
-    margin-left: 70px;
-    margin-right: 70px;
-    margin-top: 5rem;
-    padding: 2rem;
-    flex-grow: 1;
-    max-width: 900px;
-  }
-
-  /* Nav interna */
-  nav {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-    flex-wrap: wrap;
-  }
-  nav button {
-    background: transparent;
-    border: 2px solid #ff4444;
-    color: #ff4444;
-    padding: 0.5rem 1.5rem;
-    cursor: pointer;
-    font-weight: 700;
-    border-radius: 25px;
-    transition: background-color 0.3s, color 0.3s;
-    user-select: none;
-    font-family: 'Cinzel', serif;
-    font-size: 1rem;
-  }
-  nav button:hover:not(.active) {
-    background: #ff4444;
-    color: #121212;
-  }
-  nav button.active {
-    background: #ff4444;
-    color: #121212;
-    cursor: default;
-  }
-
-  /* Seções estilizadas como cards */
-  section {
-    display: none;
-    background: #1a1a1a;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 0 15px #550000aa;
-    margin-bottom: 2rem;
-    animation: fadeSlideIn 0.5s ease forwards;
-    outline-offset: -8px;
-  }
-  section.active {
-    display: block;
-  }
-
-  /* Animação fade + slide */
-  @keyframes fadeSlideIn {
-    from {
-      opacity: 0;
-      transform: translateY(15px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  /* Títulos */
-  h1, h2, h3 {
-    font-family: 'Cinzel', serif;
-    font-weight: 700;
-    color: #ff6666;
-    text-shadow: 0 0 8px #660000aa;
-    margin-top: 0;
-  }
-
-  /* Ícones antes de itens da lista */
-  ul li {
-    margin-bottom: 0.5rem;
-    position: relative;
-    padding-left: 1.4rem;
-  }
-  ul li::before {
-    content: "✦";
-    position: absolute;
-    left: 0;
-    color: #ff4444;
-  }
-
-  /* Parágrafos */
-  p {
-    margin-bottom: 1rem;
-  }
-
-  /* Blockquotes melhorados */
-  blockquote {
-    border-left: 6px solid #ff4444;
-    background: #33000022;
-    padding: 1rem 1.5rem;
-    border-radius: 8px;
-    font-style: italic;
-    color: #ff6666;
-    box-shadow: 0 0 10px #ff4444aa;
-    margin: 1.5rem 0;
-    user-select: text;
-  }
-
-  /* HR customizado */
-  hr {
-    border: none;
-    height: 1px;
-    background: #550000aa;
-    margin: 1.5rem 0;
-  }
-
-  /* Imagem Toriel com borda e sombra */
-  .toriel-img {
-    display: block;
-    max-width: 300px;
-    width: 100%;
-    height: auto;
-    margin: 1rem auto 2rem auto;
-    border-radius: 10px;
-    border: 3px solid #ff4444;
-    box-shadow: 0 0 20px #ff4444cc;
-  }
-
-  /* Seção Toriel com fundo verde escuro */
-  .toriel {
-    background: #1d2a1d;
-    border-left: 6px solid #44ff44aa;
-    box-shadow: 0 0 15px #44ff4499;
-    padding: 2rem;
-    border-radius: 12px;
-    color: #bbffbb;
-  }
-  .toriel h1, .toriel h2, .toriel h3 {
-    color: #88ff88;
-    text-shadow: 0 0 8px #00aa00cc;
-  }
-  .toriel blockquote {
-    border-left: 6px solid #44ff44;
-    background: #11331144;
-    color: #bbffbb;
-    box-shadow: 0 0 10px #44ff44bb;
-  }
-
-  /* Scrollbar custom */
-  ::-webkit-scrollbar {
-    width: 10px;
-  }
-  ::-webkit-scrollbar-track {
-    background: #1a1a1a;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #660000;
-    border-radius: 5px;
-  }
-
-  /* Responsivo */
-  @media (max-width: 480px) {
-    nav {
-      gap: 0.5rem;
-    }
-    nav button {
-      padding: 0.5rem 1rem;
-      font-size: 0.9rem;
-    }
-    .sidebar {
-      width: 50px;
-    }
-    .sidebar button {
-      font-size: 1.5rem;
-    }
-    .sidebar-right {
-      width: 50px;
-    }
-    .sidebar-right .lord-btn {
-      width: 36px;
-      height: 36px;
-      padding: 2px;
-    }
-    header {
-      left: 50px;
-      right: 50px;
-      font-size: 1.6rem;
-      padding: 0.8rem;
-    }
-    main {
-      margin-left: 50px;
-      margin-right: 50px;
-      padding: 1rem;
-      max-width: 100%;
-    }
-  }
-
-  /* Footer simples */
-  footer {
-    text-align: center;
-    padding: 1rem;
-    color: #660000aa;
-    font-size: 0.9rem;
-    font-family: 'Cinzel', serif;
-    user-select: none;
-  }
-
-  /* Ajustes para a seção dos lordes */
-  #lordes h1 {
-    color: #ff4444;
-    text-shadow: 0 0 10px #aa0000;
-    font-family: 'Cinzel', serif;
-    margin-bottom: 1rem;
-  }
-  #lordes article {
-    display: none;
-    background: #1a1a1a;
-    padding: 1.5rem 2rem;
-    border-radius: 10px;
-    box-shadow: 0 0 12px #550000aa;
-    margin-bottom: 1.5rem;
-    animation: fadeSlideIn 0.4s ease forwards;
-  }
-  #lordes article.active {
-    display: block;
-  }
-</style>
-</head>
-<body>
-
-<!-- Barra lateral esquerda -->
-<div class="sidebar" role="navigation" aria-label="Menu lateral de personagens">
-  <button class="sidebar-btn active" data-tab="arco1" title="Arco 1 – Traição">🌑</button>
-  <button class="sidebar-btn" data-tab="arco2" title="Arco 2 – Quimeras">🩸</button>
-  <button class="sidebar-btn" data-tab="arco3" title="Arco 3 – Jogos de Inverno">❄️</button>
-  <button class="sidebar-btn" data-tab="toriel" title="Personagem: Toriel Lionheart">👤</button>
-  <button class="sidebar-btn" data-tab="lordes" title="Nove Lordes Demoníacos">☠️</button>
-</div>
-
-<!-- Barra lateral direita (Lordes Demoníacos) -->
-<div class="sidebar-right" role="navigation" aria-label="Nove Lordes Demoníacos">
-  <button class="lord-btn active" data-lord="malthazor" title="Mal'Thazor, o Espreitador da Carne" aria-label="Mal'Thazor">
-    <!-- Ícone: garra estilizada -->
-    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      <path d="M4 17s1-3 3-4 3 3 3 3l-3 4-3-3zM9 9s1-4 3-5 3 4 3 4l-3 5-3-4zM15 12s1-2 3-2 3 3 3 3l-3 3-3-4z"/>
-    </svg>
-  </button>
-  <button class="lord-btn" data-lord="vhoraketh" title="Vhor'Aketh, o Ceifador do Tempo Esquecido" aria-label="Vhor'Aketh">
-    <!-- Ícone: ampulheta quebrada -->
-    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      <path d="M6 2h12v2l-5 6 5 6v2H6v-2l5-6-5-6V2z"/>
-      <line x1="8" y1="8" x2="16" y2="16" stroke="#ff4444" stroke-width="2"/>
-    </svg>
-  </button>
-  <button class="lord-btn" data-lord="zennorkai" title="Zennor'Kai, o Riso Sepulcral" aria-label="Zennor'Kai">
-    <!-- Ícone: máscara -->
-    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      <circle cx="12" cy="12" r="10" stroke="#ff4444" stroke-width="2" fill="none"/>
-      <path d="M8 9h8M8 15h8M12 12v-3" stroke="#ff4444" stroke-width="2" stroke-linecap="round"/>
-    </svg>
-  </button>
-  <button class="lord-btn" data-lord="liranach" title="Lir'Anach, o Lamento dos Lares" aria-label="Lir'Anach">
-    <!-- Ícone: casa quebrada -->
-    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      <path d="M3 12l9-9 9 9v9H3v-9z" stroke="#ff4444" stroke-width="2" fill="none"/>
-      <line x1="9" y1="21" x2="9" y2="12" stroke="#ff4444" stroke-width="2"/>
-      <line x1="15" y1="21" x2="15" y2="12" stroke="#ff4444" stroke-width="2"/>
-    </svg>
-  </button>
-  <button class="lord-btn" data-lord="ogrionthul" title="Ogrion'Thul, o Engolidor de Pactos" aria-label="Ogrion'Thul">
-    <!-- Ícone: pergaminho -->
-    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      <rect x="6" y="4" width="12" height="16" rx="2" ry="2" stroke="#ff4444" stroke-width="2" fill="none"/>
-      <line x1="9" y1="8" x2="15" y2="8" stroke="#ff4444" stroke-width="2"/>
-      <line x1="9" y1="12" x2="15" y2="12" stroke="#ff4444" stroke-width="2"/>
-      <line x1="9" y1="16" x2="13" y2="16" stroke="#ff4444" stroke-width="2"/>
-    </svg>
-  </button>
-  <button class="lord-btn" data-lord="baelvureth" title="Bael'Vureth, o Chacô do Sopro Final" aria-label="Bael'Vureth">
-    <!-- Ícone: pulmão em chamas -->
-    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      <path d="M12 2s3 3 3 7-3 7-3 7-3-3-3-7 3-7 3-7z" stroke="#ff4444" stroke-width="2" fill="none"/>
-      <path d="M12 9l1 3-2 1" stroke="#ff4444" stroke-width="2" fill="none" />
-    </svg>
-  </button>
-  <button class="lord-btn" data-lord="syranom" title="Syra'Nom, a Mãe das Correntes" aria-label="Syra'Nom">
-    <!-- Ícone: corrente -->
-    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      <circle cx="8" cy="12" r="3" stroke="#ff4444" stroke-width="2" fill="none"/>
-      <circle cx="16" cy="12" r="3" stroke="#ff4444" stroke-width="2" fill="none"/>
-      <line x1="11" y1="12" x2="13" y2="12" stroke="#ff4444" stroke-width="2"/>
-    </svg>
-  </button>
-  <button class="lord-btn" data-lord="drethmur" title="Dreth'Mur, o Jantar dos Condenados" aria-label="Dreth'Mur">
-    <!-- Ícone: talheres -->
-    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      <line x1="8" y1="3" x2="8" y2="21" stroke="#ff4444" stroke-width="2"/>
-      <line x1="16" y1="3" x2="16" y2="21" stroke="#ff4444" stroke-width="2"/>
-      <circle cx="12" cy="17" r="3" stroke="#ff4444" stroke-width="2" fill="none"/>
-    </svg>
-  </button>
-  <button class="lord-btn" data-lord="kzzarun" title="Kz'Zarun, o Dente da Terra Subversa" aria-label="Kz'Zarun">
-    <!-- Ícone: vulcão -->
-    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      <path d="M6 20l6-16 6 16H6z" stroke="#ff4444" stroke-width="2" fill="none"/>
-      <path d="M12 14l3 3-6 0 3-3z" fill="#ff4444"/>
-    </svg>
-  </button>
-</div>
-
-<header>Lore da Academia Aethel</header>
-
-<main>
-  <!-- Seções principais -->
-  <section id="arco1" class="active" tabindex="0" aria-label="Arco 1 - Traição">
-    <h1>Arco 1 – Traição</h1>
-    <p>Conteúdo detalhado sobre o Arco 1 da campanha, envolvendo traições, mistérios e conflitos iniciais na Academia Aethel.</p>
-  </section>
-
-  <section id="arco2" tabindex="0" aria-label="Arco 2 - Quimeras">
-    <h1>Arco 2 – Quimeras</h1>
-    <p>Detalhes sobre o segundo arco, focando em experimentos com quimeras e as consequências sombrias dos pactos.</p>
-  </section>
-
-  <section id="arco3" tabindex="0" aria-label="Arco 3 - Jogos de Inverno">
-    <h1>Arco 3 – Jogos de Inverno</h1>
-    <p>Relatos da participação dos personagens nos Jogos de Inverno, as alianças e rivalidades dentro da academia Bayat al Nar.</p>
-  </section>
-
-  <section id="toriel" tabindex="0" aria-label="Personagem Toriel Lionheart" class="toriel">
-    <h1>Toriel Lionheart</h1>
-    <img src="https://i.imgur.com/7WqD5x1.png" alt="Retrato de Toriel Lionheart" class="toriel-img" />
-    <p>Toriel Lionheart, filho do rei do Brasil, nascido em 1483, terceiro na linha de sucessão ao trono. Estudante da Academia Aethel, acusado injustamente de um crime hediondo, atualmente foragido e marcado por segredos sombrios.</p>
-    <blockquote>
-      “A justiça é uma lâmina de dois gumes — e eu ainda carrego as cicatrizes do seu corte.”
-    </blockquote>
-  </section>
-
-  <section id="lordes" tabindex="0" aria-label="Descrição dos Nove Lordes Demoníacos" style="display:none;">
-    <h1>Os Nove Lordes Demoníacos</h1>
-    <blockquote>
-      Poucos ousam registrar os nomes dos Nove Lordes Demoníacos. Essas entidades representam os pilares da perversão, da dor e da corrupção da alma.<br>
-      Este tomo não pretende invocá-los, mas sim compreender seus domínios e as oferendas que exigem para manifestar sua presença.
-    </blockquote>
-
-    <article id="malthazor" class="lord active" tabindex="0">
-      <h2>Mal'Thazor, o Espreitador da Carne</h2>
-      <p><strong>Domínio:</strong> Luxúria Sangrenta e Mutabilidade Corpórea</p>
-      <p><strong>Símbolos:</strong> Garras entrelaçadas, olhos cerrados</p>
-      <p><strong>Oferenda:</strong> Fragmentos de pele arrancados sob desejo intenso</p>
-    </article>
-
-    <article id="vhoraketh" class="lord" tabindex="0">
-      <h2>Vhor'Aketh, o Ceifador do Tempo Esquecido</h2>
-      <p><strong>Domínio:</strong> Entropia Temporal e Memória Corroída</p>
-      <p><strong>Símbolos:</strong> Ampulheta quebrada, espiral invertida</p>
-      <p><strong>Oferenda:</strong> Lembranças escritas e consumidas em velas negras</p>
-    </article>
-
-    <article id="zennorkai" class="lord" tabindex="0">
-      <h2>Zennor'Kai, o Riso Sepulcral</h2>
-      <p><strong>Domínio:</strong> Loucura, Paranoia e Comédia Cruel</p>
-      <p><strong>Símbolos:</strong> Máscaras rachadas, moinhos de vento parados</p>
-      <p><strong>Oferenda:</strong> Gargalhadas forçadas diante do próprio reflexo</p>
-    </article>
-
-    <article id="liranach" class="lord" tabindex="0">
-      <h2>Lir'Anach, o Lamento dos Lares</h2>
-      <p><strong>Domínio:</strong> Desespero Doméstico e Ruína Emocional</p>
-      <p><strong>Símbolos:</strong> Bonecas partidas, janelas trancadas</p>
-      <p><strong>Oferenda:</strong> Cartas de amor rasgadas e molhadas em lágrimas</p>
-    </article>
-
-    <article id="ogrionthul" class="lord" tabindex="0">
-      <h2>Ogrion'Thul, o Engolidor de Pactos</h2>
-      <p><strong>Domínio:</strong> Corrupção Mágica e Traição Arcana</p>
-      <p><strong>Símbolos:</strong> Contratos manchados de sangue, pergaminhos devorados</p>
-      <p><strong>Oferenda:</strong> Juramentos quebrados escritos com o próprio sangue</p>
-    </article>
-
-    <article id="baelvureth" class="lord" tabindex="0">
-      <h2>Bael'Vureth, o Chacô do Sopro Final</h2>
-      <p><strong>Domínio:</strong> Agonia Respiratória e Medo Terminal</p>
-      <p><strong>Símbolos:</strong> Pulmões em chamas, sinos de bronze</p>
-      <p><strong>Oferenda:</strong> O último suspiro de um moribundo</p>
-    </article>
-
-    <article id="syranom" class="lord" tabindex="0">
-      <h2>Syra'Nom, a Mãe das Correntes</h2>
-      <p><strong>Domínio:</strong> Escravidão Mental e Privação Sensorial</p>
-      <p><strong>Símbolos:</strong> Algemas abertas, olhos vendados</p>
-      <p><strong>Oferenda:</strong> Três dias de silêncio absoluto em cela escura</p>
-    </article>
-
-    <article id="drethmur" class="lord" tabindex="0">
-      <h2>Dreth'Mur, o Jantar dos Condenados</h2>
-      <p><strong>Domínio:</strong> Degradação Culinária e Canibalismo Rituálico</p>
-      <p><strong>Símbolos:</strong> Talheres enferrujados, pratos vazios</p>
-      <p><strong>Oferenda:</strong> Um banquete onde se coma da própria carne em delírio</p>
-    </article>
-
-    <article id="kzzarun" class="lord" tabindex="0">
-      <h2>Kz'Zarun, o Dente da Terra Subversa</h2>
-      <p><strong>Domínio:</strong> Putrefação Geológica e Tremores Hereges</p>
-      <p><strong>Símbolos:</strong> Pedras sangrentas, mapas rasgados</p>
-      <p><strong>Oferenda:</strong> Enterrar um espírito consciente sob sal negro e cinzas</p>
-    </article>
-
-    <blockquote style="margin-top: 2rem; font-style: italic; color: #aa4444;">
-      <strong>Advertência:</strong> A simples leitura destes nomes pode atrair os olhos do Abismo. Nunca pronuncie em voz alta. Nunca repita. Nunca transcreva novamente o que aqui está escrito. Este livro é um espelho — ele não reflete, mas absorve.
-    </blockquote>
-  </section>
-</main>
-
-<footer>
-  © 2025 Lore da Academia Aethel. Todos os direitos reservados.
-</footer>
-
-<script>
-  // Função para ativar abas da sidebar esquerda
-  const sidebarButtons = document.querySelectorAll('.sidebar-btn');
-  const sections = document.querySelectorAll('main > section');
-
-  function activateSidebarTab(tabId) {
-    sidebarButtons.forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.tab === tabId);
-    });
-    sections.forEach(sec => {
-      sec.classList.toggle('active', sec.id === tabId);
-      if(sec.id === tabId) {
-        sec.style.display = 'block';
-        sec.focus();
-      } else {
-        sec.style.display = 'none';
-      }
-    });
-  }
-
-  sidebarButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      activateSidebarTab(btn.dataset.tab);
-    });
-  });
-
-  // Função para ativar abas dos lordes demoníacos (sidebar direita)
-  const lordButtons = document.querySelectorAll('.sidebar-right .lord-btn');
-  const lordSections = document.querySelectorAll('#lordes article');
-
-  function activateLordTab(lord) {
-    lordButtons.forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.lord === lord);
-    });
-    lordSections.forEach(sec => {
-      sec.classList.toggle('active', sec.id === lord);
-    });
-  }
-
-  lordButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      activateLordTab(btn.dataset.lord);
-      // Exibe a seção dos lordes demoníacos na sidebar esquerda
-      activateSidebarTab('lordes');
-    });
-  });
-
-  // Ativa a aba inicial ao carregar
-  activateSidebarTab('arco1');
-  activateLordTab('malthazor');
-</script>
-
-</body>
-</html>Claro! Aqui está o código completo, unificado e organizado conforme pediu, juntando sua barra lateral esquerda, a barra lateral direita dos Lordes Demoníacos com seus ícones SVG, as seções principais, o estilo e o JavaScript para navegação entre abas.
-
-```html
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Lore da Academia Aethel</title>
-
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Open+Sans&display=swap" rel="stylesheet" />
-
-<style>
-  /* Reset */
-  *, *::before, *::after {
-    box-sizing: border-box;
-  }
-
-  /* Fundo com textura sutil e cor base */
-  body {
-    margin: 0;
-    background: 
-      url('https://www.transparenttextures.com/patterns/dark-mosaic.png') repeat,
-      #121212;
-    color: #eee;
-    font-family: 'Open Sans', sans-serif;
-    line-height: 1.5;
-    display: flex;
-    min-height: 100vh;
-  }
-
-  /* Barra lateral esquerda */
-  .sidebar {
-    position: fixed;
-    top: 0; left: 0;
-    width: 70px; height: 100vh;
-    background: linear-gradient(180deg, #1a1a1a, #141414);
-    border-right: 2px solid #550000aa;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 1rem;
-    z-index: 20;
-  }
-  .sidebar button {
-    background: none;
-    border: none;
-    color: #ff6666;
-    font-size: 1.8rem;
-    margin: 0.8rem 0;
-    cursor: pointer;
-    transition: color 0.3s, transform 0.3s;
-    position: relative;
-  }
-  .sidebar button:hover {
-    color: #fff;
-    transform: scale(1.3);
-  }
-  .sidebar button.active {
-    color: #44ff44;
-    transform: scale(1.4);
-  }
-  .sidebar button::after {
-    content: attr(title);
-    position: absolute;
-    left: 60px;
-    background: #1a1a1a;
-    padding: 0.3rem 0.6rem;
-    font-size: 0.85rem;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s;
-    border: 1px solid #550000aa;
-    border-radius: 4px;
-    box-shadow: 0 0 8px #550000aa;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  .sidebar button:hover::after {
-    opacity: 1;
-  }
-
-  /* Barra lateral direita - Lordes Demoníacos */
+  /* Barra lateral direita */
   .sidebar-right {
     position: fixed;
     top: 0; right: 0;
@@ -730,25 +94,37 @@
   .sidebar-right button {
     background: none;
     border: none;
-    color: #ff4444;
-    font-size: 1.8rem;
-    margin: 0.8rem 0;
+    margin: 0.7rem 0;
     cursor: pointer;
-    transition: color 0.3s, transform 0.3s;
+    transition: transform 0.3s, filter 0.3s;
+    width: 48px;
+    height: 48px;
+    padding: 4px;
+    border-radius: 8px;
+    filter: grayscale(0.7) brightness(0.7);
     position: relative;
   }
+  .sidebar-right button svg {
+    width: 100%;
+    height: 100%;
+    fill: #ff4444;
+    transition: fill 0.3s;
+  }
   .sidebar-right button:hover {
-    color: #ff9999;
+    filter: none;
     transform: scale(1.3);
   }
   .sidebar-right button.active {
-    color: #44ff44;
+    filter: none;
     transform: scale(1.4);
+  }
+  .sidebar-right button.active svg {
+    fill: #44ff44;
   }
   .sidebar-right button::after {
     content: attr(title);
     position: absolute;
-    right: 60px;
+    right: 80px;
     background: #1a1a1a;
     padding: 0.3rem 0.6rem;
     font-size: 0.85rem;
@@ -790,40 +166,10 @@
     padding: 2rem;
     flex-grow: 1;
     max-width: 900px;
+    overflow-y: auto;
   }
 
-  /* Nav interna */
-  nav {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-    flex-wrap: wrap;
-  }
-  nav button {
-    background: transparent;
-    border: 2px solid #ff4444;
-    color: #ff4444;
-    padding: 0.5rem 1.5rem;
-    cursor: pointer;
-    font-weight: 700;
-    border-radius: 25px;
-    transition: background-color 0.3s, color 0.3s;
-    user-select: none;
-    font-family: 'Cinzel', serif;
-    font-size: 1rem;
-  }
-  nav button:hover:not(.active) {
-    background: #ff4444;
-    color: #121212;
-  }
-  nav button.active {
-    background: #ff4444;
-    color: #121212;
-    cursor: default;
-  }
-
-  /* Seções estilizadas como cards */
+  /* Seções estilizadas */
   section {
     display: none;
     background: #1a1a1a;
@@ -838,7 +184,6 @@
     display: block;
   }
 
-  /* Animação fade + slide */
   @keyframes fadeSlideIn {
     from {
       opacity: 0;
@@ -877,7 +222,7 @@
     margin-bottom: 1rem;
   }
 
-  /* Blockquotes melhorados */
+  /* Blockquotes */
   blockquote {
     border-left: 6px solid #ff4444;
     background: #33000022;
@@ -890,47 +235,7 @@
     user-select: text;
   }
 
-  /* HR customizado */
-  hr {
-    border: none;
-    height: 1px;
-    background: #550000aa;
-    margin: 1.5rem 0;
-  }
-
-  /* Imagem Toriel com borda e sombra */
-  .toriel-img {
-    display: block;
-    max-width: 300px;
-    width: 100%;
-    height: auto;
-    margin: 1rem auto 2rem auto;
-    border-radius: 10px;
-    border: 3px solid #ff4444;
-    box-shadow: 0 0 20px #ff4444cc;
-  }
-
-  /* Seção Toriel com fundo verde escuro */
-  .toriel {
-    background: #1d2a1d;
-    border-left: 6px solid #44ff44aa;
-    box-shadow: 0 0 15px #44ff4499;
-    padding: 2rem;
-    border-radius: 12px;
-    color: #bbffbb;
-  }
-  .toriel h1, .toriel h2, .toriel h3 {
-    color: #88ff88;
-    text-shadow: 0 0 8px #00aa00cc;
-  }
-  .toriel blockquote {
-    border-left: 6px solid #44ff44;
-    background: #11331144;
-    color: #bbffbb;
-    box-shadow: 0 0 10px #44ff44bb;
-  }
-
-  /* Scrollbar custom */
+  /* Scrollbar */
   ::-webkit-scrollbar {
     width: 10px;
   }
@@ -944,25 +249,16 @@
 
   /* Responsivo */
   @media (max-width: 480px) {
-    nav {
-      gap: 0.5rem;
-    }
-    nav button {
-      padding: 0.5rem 1rem;
-      font-size: 0.9rem;
-    }
-    .sidebar {
+    .sidebar-left, .sidebar-right {
       width: 50px;
     }
-    .sidebar button {
+    .sidebar-left button {
       font-size: 1.5rem;
-    }
-    .sidebar-right {
-      width: 50px;
     }
     .sidebar-right button {
-      font-size: 1.5rem;
-      margin: 0.6rem 0;
+      width: 36px;
+      height: 36px;
+      padding: 2px;
     }
     header {
       left: 50px;
@@ -977,302 +273,215 @@
       max-width: 100%;
     }
   }
-
-  /* Footer simples */
-  footer {
-    text-align: center;
-    padding: 1rem;
-    color: #660000aa;
-    font-size: 0.9rem;
-    font-family: 'Cinzel', serif;
-    user-select: none;
-  }
-
-  /* Ajustes para a seção dos lordes */
-  #lordes h1 {
-    color: #ff4444;
-    text-shadow: 0 0 10px #aa0000;
-    font-family: 'Cinzel', serif;
-    margin-bottom: 1rem;
-  }
-  #lordes article {
-    display: none;
-    background: #1a1a1a;
-    padding: 1.5rem 2rem;
-    border-radius: 10px;
-    box-shadow: 0 0 12px #550000aa;
-    margin-bottom: 1.5rem;
-    animation: fadeSlideIn 0.4s ease forwards;
-  }
-  #lordes article.active {
-    display: block;
-  }
 </style>
 </head>
-
 <body>
 
-  <!-- Barra lateral esquerda -->
-  <div class="sidebar" role="navigation" aria-label="Menu lateral de personagens">
-    <button class="sidebar-btn active" data-tab="arco1" title="Arco 1 – Traição">🌑</button>
-    <button class="sidebar-btn" data-tab="arco2" title="Arco 2 – Quimeras">🩸</button>
-    <button class="sidebar-btn" data-tab="arco3" title="Arco 3 – Jogos de Inverno">❄️</button>
-    <button class="sidebar-btn" data-tab="toriel" title="Personagem: Toriel Lionheart">👤</button>
-    <button class="sidebar-btn" data-tab="lordes" title="Nove Lordes Demoníacos">🔥</button>
-  </div>
+<!-- Barra lateral esquerda -->
+<div class="sidebar-left" role="navigation" aria-label="Menu lateral esquerdo">
+  <button class="sidebar-left-btn active" data-tab="arco1" title="Arco 1 – Traição">🌑</button>
+  <button class="sidebar-left-btn" data-tab="arco2" title="Arco 2 – Quimeras">🩸</button>
+  <button class="sidebar-left-btn" data-tab="arco3" title="Arco 3 – Jogos de Inverno">❄️</button>
+  <button class="sidebar-left-btn" data-tab="toriel" title="Personagem: Toriel Lionheart">👤</button>
+  <button class="sidebar-left-btn" data-tab="lordes" title="Nove Lordes Demoníacos">👹</button>
+</div>
 
-  <!-- Barra lateral direita (Lordes Demoníacos) -->
-  <div class="sidebar-right" role="navigation" aria-label="Nove Lordes Demoníacos">
-    <button class="lord-btn active" data-lord="malthazor" title="Mal'Thazor, o Espreitador da Carne" aria-label="Mal'Thazor">
-      <!-- Ícone: garra estilizada -->
-      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-        <path d="M4 17s1-3 3-4 3 3 3 3l-3 4-3-3zM9 9s1-4 3-5 3 4 3 4l-3 5-3-4zM15 12s1-2 3-2 3 3 3 3l-3 3-3-4z"/>
-      </svg>
-    </button>
-    <button class="lord-btn" data-lord="vhoraketh" title="Vhor'Aketh, o Ceifador do Tempo Esquecido" aria-label="Vhor'Aketh">
-      <!-- Ícone: ampulheta quebrada -->
-      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-        <path d="M6 2h12v2l-5 6 5 6v2H6v-2l5-6-5-6V2z"/>
-        <line x1="8" y1="8" x2="16" y2="16" stroke="#ff4444" stroke-width="2"/>
-      </svg>
-    </button>
-    <button class="lord-btn" data-lord="zennorkai" title="Zennor'Kai, o Riso Sepulcral" aria-label="Zennor'Kai">
-      <!-- Ícone: máscara -->
-      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-        <circle cx="12" cy="12" r="10" stroke="#ff4444" stroke-width="2" fill="none"/>
-        <path d="M8 9h8M8 15h8M12 12v-3" stroke="#ff4444" stroke-width="2" stroke-linecap="round"/>
-      </svg>
-    </button>
-    <button class="lord-btn" data-lord="liranach" title="Lir'Anach, o Lamento dos Lares" aria-label="Lir'Anach">
-      <!-- Ícone: casa quebrada -->
-      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-        <path d="M3 12l9-9 9 9v9H3v-9z" stroke="#ff4444" stroke-width="2" fill="none"/>
-        <line x1="9" y1="21" x2="9" y2="12" stroke="#ff4444" stroke-width="2"/>
-        <line x1="15" y1="21" x2="15" y2="12" stroke="#ff4444" stroke-width="2"/>
-      </svg>
-    </button>
-    <button class="lord-btn" data-lord="ogrionthul" title="Ogrion'Thul, o Engolidor de Pactos" aria-label="Ogrion'Thul">
-      <!-- Ícone: pergaminho -->
-      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-        <rect x="6" y="4" width="12" height="16" rx="2" ry="2" stroke="#ff4444" stroke-width="2" fill="none"/>
-        <line x1="9" y1="8" x2="15" y2="8" stroke="#ff4444" stroke-width="2"/>
-        <line x1="9" y1="12" x2="15" y2="12" stroke="#ff4444" stroke-width="2"/>
-               <line x1="9" y1="16" x2="13" y2="16" stroke="#ff4444" stroke-width="2"/>
-      </svg>
-    </button>
-    <button class="lord-btn" data-lord="baelvureth" title="Bael'Vureth, o Chacô do Sopro Final" aria-label="Bael'Vureth">
-      <!-- Ícone: pulmões em chamas -->
-      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-        <path d="M8 7s-1 3 2 5 4-3 4-3-1 5-3 6-3-4-3-6z" stroke="#ff4444" stroke-width="2" fill="none"/>
-        <path d="M12 2s2 3 0 5-3 3-2 6" stroke="#ff4444" stroke-width="2" fill="none"/>
-        <path d="M7 17s1 2 5 2 5-2 5-2" stroke="#ff4444" stroke-width="2" fill="none"/>
-      </svg>
-    </button>
-    <button class="lord-btn" data-lord="syranom" title="Syra'Nom, a Mãe das Correntes" aria-label="Syra'Nom">
-      <!-- Ícone: algemas -->
-      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-        <circle cx="7" cy="12" r="4" stroke="#ff4444" stroke-width="2" fill="none"/>
-        <circle cx="17" cy="12" r="4" stroke="#ff4444" stroke-width="2" fill="none"/>
-        <line x1="11" y1="12" x2="13" y2="12" stroke="#ff4444" stroke-width="2"/>
-      </svg>
-    </button>
-    <button class="lord-btn" data-lord="drethmur" title="Dreth'Mur, o Jantar dos Condenados" aria-label="Dreth'Mur">
-      <!-- Ícone: talheres cruzados -->
-      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-        <line x1="8" y1="4" x2="8" y2="20" stroke="#ff4444" stroke-width="2"/>
-        <line x1="16" y1="4" x2="16" y2="20" stroke="#ff4444" stroke-width="2"/>
-        <line x1="6" y1="12" x2="18" y2="12" stroke="#ff4444" stroke-width="2"/>
-      </svg>
-    </button>
-    <button class="lord-btn" data-lord="kzzarun" title="Kz'Zarun, o Dente da Terra Subversa" aria-label="Kz'Zarun">
-      <!-- Ícone: pedra rachada -->
-      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-        <polygon points="12,2 20,8 17,20 7,20 4,8" stroke="#ff4444" stroke-width="2" fill="none"/>
-        <line x1="12" y1="2" x2="12" y2="20" stroke="#ff4444" stroke-width="2"/>
-      </svg>
-    </button>
-  </div>
+<!-- Barra lateral direita -->
+<div class="sidebar-right" role="navigation" aria-label="Menu lateral direito dos Lordes Demoníacos">
+  <button class="sidebar-right-btn active" data-lord="malthazor" title="Mal'Thazor, o Espreitador da Carne" aria-label="Mal'Thazor">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M4 17s1-3 3-4 3 3 3 3l-3 4-3-3zM9 9s1-4 3-5 3 4 3 4l-3 5-3-4zM15 12s1-2 3-2 3 3 3 3l-3 3-3-4z"/>
+    </svg>
+  </button>
+  <button class="sidebar-right-btn" data-lord="vhoraketh" title="Vhor'Aketh, o Ceifador do Tempo Esquecido" aria-label="Vhor'Aketh">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M6 2h12v2l-5 6 5 6v2H6v-2l5-6-5-6V2z"/>
+      <line x1="8" y1="8" x2="16" y2="16" stroke="#ff4444" stroke-width="2"/>
+    </svg>
+  </button>
+  <button class="sidebar-right-btn" data-lord="zennorkai" title="Zennor'Kai, o Riso Sepulcral" aria-label="Zennor'Kai">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <circle cx="12" cy="12" r="10" stroke="#ff4444" stroke-width="2" fill="none"/>
+      <path d="M8 9h8M8 15h8M12 12v-3" stroke="#ff4444" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </button>
+  <button class="sidebar-right-btn" data-lord="liranach" title="Lir'Anach, o Lamento dos Lares" aria-label="Lir'Anach">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M3 12l9-9 9 9v9H3v-9z" stroke="#ff4444" stroke-width="2" fill="none"/>
+      <line x1="9" y1="21" x2="9" y2="12" stroke="#ff4444" stroke-width="2"/>
+      <line x1="15" y1="21" x2="15" y2="12" stroke="#ff4444" stroke-width="2"/>
+    </svg>
+  </button>
+  <button class="sidebar-right-btn" data-lord="ogrionthul" title="Ogrion'Thul, o Engolidor de Pactos" aria-label="Ogrion'Thul">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <rect x="6" y="4" width="12" height="16" rx="2" ry="2" stroke="#ff4444" stroke-width="2" fill="none"/>
+      <line x1="9" y1="8" x2="15" y2="8" stroke="#ff4444" stroke-width="2"/>
+      <line x1="9" y1="12" x2="15" y2="12" stroke="#ff4444" stroke-width="2"/>
+      <line x1="9" y1="16" x2="13" y2="16" stroke="#ff4444" stroke-width="2"/>
+    </svg>
+  </button>
+  <button class="sidebar-right-btn" data-lord="baelvureth" title="Bael'Vureth, o Chacô do Sopro Final" aria-label="Bael'Vureth">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M12 2s3 3 3 7-3 7-3 7-3-3-3-7 3-7 3-7z" stroke="#ff4444" stroke-width="2" fill="none"/>
+      <path d="M12 9l1 3-2 1" stroke="#ff4444" stroke-width="2" fill="none" />
+    </svg>
+  </button>
+  <button class="sidebar-right-btn" data-lord="syranom" title="Syra'Nom, a Mãe das Correntes" aria-label="Syra'Nom">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <circle cx="8" cy="12" r="3" stroke="#ff4444" stroke-width="2" fill="none"/>
+      <circle cx="16" cy="12" r="3" stroke="#ff4444" stroke-width="2" fill="none"/>
+      <line x1="11" y1="12" x2="13" y2="12" stroke="#ff4444" stroke-width="2"/>
+    </svg>
+  </button>
+  <button class="sidebar-right-btn" data-lord="drethmur" title="Dreth'Mur, o Jantar dos Condenados" aria-label="Dreth'Mur">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M3 17h18v2H3zM6 12h12v2H6zM9 7h6v2H9z" stroke="#ff4444" stroke-width="2" fill="none"/>
+      <circle cx="12" cy="14" r="1" fill="#ff4444"/>
+    </svg>
+  </button>
+  <button class="sidebar-right-btn" data-lord="kzzarun" title="Kz'Zarun, o Dente da Terra Subversa" aria-label="Kz'Zarun">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M12 2L4 22h16L12 2z" stroke="#ff4444" stroke-width="2" fill="none"/>
+      <circle cx="12" cy="16" r="2" fill="#ff4444"/>
+    </svg>
+  </button>
+</div>
 
-  <!-- Cabeçalho -->
-  <header>
-    Lore da Academia Aethel
-  </header>
+<header>Lore da Academia Aethel</header>
 
-  <!-- Conteúdo principal -->
-  <main>
+<main>
+  <!-- Seções da barra esquerda -->
+  <section id="arco1" class="active" tabindex="0" aria-label="Arco 1 – Traição">
+    <h1>Arco 1 – Traição</h1>
+    <p>Os personagens são alunos recém-chegados à Academia Aethel, onde acabam se conhecendo ao seguir um misterioso tentáculo negro nos corredores da escola...</p>
+  </section>
 
-    <!-- Seção Arco 1 -->
-    <section id="arco1" tabindex="0" class="active" aria-label="Arco 1 – Traição">
-      <h1>Arco 1 – Traição</h1>
-      <p>Introdução:</p>
-      <p>Os personagens são alunos recém-chegados à Academia Aethel, onde acabam se conhecendo ao seguir um misterioso tentáculo negro nos corredores da escola.</p>
-      <p>Eventos principais:</p>
-      <ul>
-        <li>Descoberta do assassinato do reitor.</li>
-        <li>Acusação injusta e fuga dos personagens.</li>
-        <li>Encontro com membros da Trupe dos Sete Espinhos.</li>
-      </ul>
-    </section>
+  <section id="arco2" tabindex="0" aria-label="Arco 2 – Quimeras">
+    <h1>Arco 2 – Quimeras</h1>
+    <p>Enfrentando quimeras e experimentos mágicos, os personagens descobrem segredos obscuros e precisam lidar com forças além da compreensão humana.</p>
+  </section>
 
-    <!-- Seção Arco 2 -->
-    <section id="arco2" tabindex="0" aria-label="Arco 2 – Quimeras">
-      <h1>Arco 2 – Quimeras</h1>
-      <p>Depois da fuga, os personagens enfrentam experimentos sombrios e confrontam a Legião Abissal, lutando contra quimeras e descobrindo pactos ancestrais.</p>
-    </section>
+  <section id="arco3" tabindex="0" aria-label="Arco 3 – Jogos de Inverno">
+    <h1>Arco 3 – Jogos de Inverno</h1>
+    <p>Os personagens entram disfarçados na Academia Bayat al Nar para participar dos Jogos de Inverno, um torneio ritualístico cheio de perigos e intrigas.</p>
+  </section>
 
-    <!-- Seção Arco 3 -->
-    <section id="arco3" tabindex="0" aria-label="Arco 3 – Jogos de Inverno">
-      <h1>Arco 3 – Jogos de Inverno</h1>
-      <p>Os personagens se infiltram na Academia Bayat al Nar disfarçados como alunos, participando de um torneio ritualístico onde disputam contra a Trupe dos Sete Espinhos.</p>
-    </section>
+  <section id="toriel" tabindex="0" aria-label="Personagem Toriel Lionheart">
+    <h1>Toriel Lionheart</h1>
+    <p>Filho do rei do Brasil, nascido em 1483, acusado injustamente do assassinato do reitor. Toriel é um estudante misterioso com uma história sinistra envolvendo traições e segredos da academia.</p>
+  </section>
 
-    <!-- Seção Personagem Toriel -->
-    <section id="toriel" class="toriel" tabindex="0" aria-label="Personagem Toriel Lionheart">
-      <h1>Toriel Lionheart</h1>
-      <img src="https://i.imgur.com/h4z6Ckf.jpg" alt="Retrato de Toriel Lionheart" class="toriel-img" />
-      <h2>Filho do Rei do Brasil</h2>
-      <p>Nasceu em 6 de janeiro de 1483, terceiro na linha de sucessão, irmão do príncipe Melchior e da princesa Cassandra.</p>
-      <p>Acusado injustamente de envolvimento no assassinato do reitor, ele fugiu e agora é uma figura enigmática que carrega um segredo sombrio.</p>
-      <blockquote>
-        “Entre sombras e luz, o lobo age, silencioso e vigilante.”
-      </blockquote>
-    </section>
+  <!-- Seção principal dos Lordes Demoníacos -->
+  <section id="lordes" tabindex="0" aria-label="Nove Lordes Demoníacos">
+    <h1>Os Nove Lordes Demoníacos</h1>
+    <p>Conheça os poderosos Lordes que ameaçam o equilíbrio do mundo de Aethel. Clique nos ícones à direita para saber mais.</p>
 
-    <!-- Seção Lordes Demoníacos -->
-    <section id="lordes" tabindex="0" aria-label="Nove Lordes Demoníacos">
-
-      <h1>Nove Lordes Demoníacos</h1>
-
-      <article id="malthazor" class="lord active" tabindex="0" aria-label="Mal'Thazor, o Espreitador da Carne">
+    <!-- Conteúdo individual de cada Lorde - só um aparece por vez -->
+    <div id="lord-content">
+      <article id="malthazor" class="lord-detail active" tabindex="0" aria-label="Mal'Thazor, o Espreitador da Carne">
         <h2>Mal'Thazor, o Espreitador da Carne</h2>
-        <p><strong>Domínio:</strong> Devoração e Corrupção Carnívora</p>
-        <p><strong>Símbolos:</strong> Garras sangrentas, olhos cerrados</p>
-        <p><strong>Oferenda:</strong> Fragmentos de pele arrancados sob desejo intenso</p>
+        <p>Um lorde sombrio que devora a carne dos inimigos e usa necromancia para controlar os corpos caídos.</p>
       </article>
 
-      <article id="vhoraketh" class="lord" tabindex="0" aria-label="Vhor'Aketh, o Ceifador do Tempo Esquecido">
+      <article id="vhoraketh" class="lord-detail" tabindex="0" aria-label="Vhor'Aketh, o Ceifador do Tempo Esquecido">
         <h2>Vhor'Aketh, o Ceifador do Tempo Esquecido</h2>
-        <p><strong>Domínio:</strong> Entropia Temporal e Memória Corroída</p>
-        <p><strong>Símbolos:</strong> Ampulheta quebrada, espiral invertida</p>
-        <p><strong>Oferenda:</strong> Lembranças escritas e consumidas em velas negras</p>
+        <p>Este lorde manipula o tempo, atrasando seus oponentes e acelerando sua própria destruição.</p>
       </article>
 
-      <article id="zennorkai" class="lord" tabindex="0" aria-label="Zennor'Kai, o Riso Sepulcral">
+      <article id="zennorkai" class="lord-detail" tabindex="0" aria-label="Zennor'Kai, o Riso Sepulcral">
         <h2>Zennor'Kai, o Riso Sepulcral</h2>
-        <p><strong>Domínio:</strong> Loucura, Paranoia e Comédia Cruel</p>
-        <p><strong>Símbolos:</strong> Máscaras rachadas, moinhos de vento parados</p>
-        <p><strong>Oferenda:</strong> Gargalhadas forçadas diante do próprio reflexo</p>
+        <p>Conhecido por seus ataques mentais e risadas macabras que enlouquecem quem as escuta.</p>
       </article>
 
-      <article id="liranach" class="lord" tabindex="0" aria-label="Lir'Anach, o Lamento dos Lares">
+      <article id="liranach" class="lord-detail" tabindex="0" aria-label="Lir'Anach, o Lamento dos Lares">
         <h2>Lir'Anach, o Lamento dos Lares</h2>
-        <p><strong>Domínio:</strong> Desespero Doméstico e Ruína Emocional</p>
-        <p><strong>Símbolos:</strong> Bonecas partidas, janelas trancadas</p>
-        <p><strong>Oferenda:</strong> Cartas de amor rasgadas e molhadas em lágrimas</p>
+        <p>Invoca espíritos dos lares abandonados para espalhar tristeza e desespero entre os vivos.</p>
       </article>
 
-      <article id="ogrionthul" class="lord" tabindex="0" aria-label="Ogrion'Thul, o Engolidor de Pactos">
+      <article id="ogrionthul" class="lord-detail" tabindex="0" aria-label="Ogrion'Thul, o Engolidor de Pactos">
         <h2>Ogrion'Thul, o Engolidor de Pactos</h2>
-        <p><strong>Domínio:</strong> Corrupção Mágica e Traição Arcana</p>
-        <p><strong>Símbolos:</strong> Contratos manchados de sangue, pergaminhos devorados</p>
-        <p><strong>Oferenda:</strong> Juramentos quebrados escritos com o próprio sangue</p>
+        <p>Especialista em quebrar acordos e devorar almas ligadas a pactos mágicos.</p>
       </article>
 
-      <article id="baelvureth" class="lord" tabindex="0" aria-label="Bael'Vureth, o Chacô do Sopro Final">
+      <article id="baelvureth" class="lord-detail" tabindex="0" aria-label="Bael'Vureth, o Chacô do Sopro Final">
         <h2>Bael'Vureth, o Chacô do Sopro Final</h2>
-        <p><strong>Domínio:</strong> Agonia Respiratória e Medo Terminal</p>
-        <p><strong>Símbolos:</strong> Pulmões em chamas, sinos de bronze</p>
-        <p><strong>Oferenda:</strong> O último suspiro de um moribundo</p>
+        <p>Controla os ventos mortais que trazem o suspiro final aos desafortunados.</p>
       </article>
 
-      <article id="syranom" class="lord" tabindex="0" aria-label="Syra'Nom, a Mãe das Correntes">
+      <article id="syranom" class="lord-detail" tabindex="0" aria-label="Syra'Nom, a Mãe das Correntes">
         <h2>Syra'Nom, a Mãe das Correntes</h2>
-        <p><strong>Domínio:</strong> Escravidão Mental e Privação Sensorial</p>
-        <p><strong>Símbolos:</strong> Algemas abertas, olhos vendados</p>
-        <p><strong>Oferenda:</strong> Três dias de silêncio absoluto em cela escura</p>
+        <p>Prende suas vítimas em correntes espirituais, impossibilitando a fuga e drenando a força vital.</p>
       </article>
 
-      <article id="drethmur" class="lord" tabindex="0" aria-label="Dreth'Mur, o Jantar dos Condenados">
+      <article id="drethmur" class="lord-detail" tabindex="0" aria-label="Dreth'Mur, o Jantar dos Condenados">
         <h2>Dreth'Mur, o Jantar dos Condenados</h2>
-        <p><strong>Domínio:</strong> Degradação Culinária e Canibalismo Rituálico</p>
-        <p><strong>Símbolos:</strong> Talheres enferrujados, pratos vazios</p>
-        <p><strong>Oferenda:</strong> Um banquete onde se coma da própria carne em delírio</p>
+        <p>Famoso por devorar as almas condenadas que caem em suas garras infernais.</p>
       </article>
 
-      <article id="kzzarun" class="lord" tabindex="0" aria-label="Kz'Zarun, o Dente da Terra Subversa">
+      <article id="kzzarun" class="lord-detail" tabindex="0" aria-label="Kz'Zarun, o Dente da Terra Subversa">
         <h2>Kz'Zarun, o Dente da Terra Subversa</h2>
-        <p><strong>Domínio:</strong> Putrefação Geológica e Tremores Hereges</p>
-        <p><strong>Símbolos:</strong> Pedras sangrentas, mapas rasgados</p>
-        <p><strong>Oferenda:</strong> Enterrar um espírito consciente sob sal negro e cinzas</p>
+        <p>Este lorde emerge das profundezas da terra para destruir tudo o que encontrar em seu caminho.</p>
       </article>
+    </div>
+  </section>
 
-      <blockquote style="margin-top: 2rem; font-style: italic; color: #aa4444;">
-        <strong>Advertência:</strong> A simples leitura destes nomes pode atrair os olhos do Abismo. Nunca pronuncie em voz alta. Nunca repita. Nunca transcreva novamente o que aqui está escrito. Este livro é um espelho — ele não reflete, mas absorve.
-      </blockquote>
-    </section>
-  </main>
+</main>
 
-  <footer>
-    © 2025 Lore da Academia Aethel. Todos os direitos reservados.
-  </footer>
+<script>
+  // Controle das abas da barra lateral esquerda
+  const leftButtons = document.querySelectorAll('.sidebar-left-btn');
+  const sections = document.querySelectorAll('main > section');
 
-  <script>
-    // Navegação barra lateral esquerda
-    const sidebarButtons = document.querySelectorAll('.sidebar-btn');
-    const sections = document.querySelectorAll('main > section');
+  leftButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      // Remove 'active' de todos botões e seções
+      leftButtons.forEach(b => b.classList.remove('active'));
+      sections.forEach(sec => sec.classList.remove('active'));
 
-    function activateSidebarTab(tabId) {
-      sidebarButtons.forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.tab === tabId);
-      });
-      sections.forEach(sec => {
-        sec.classList.toggle('active', sec.id === tabId);
-        if (sec.id === tabId) {
-          sec.style.display = 'block';
-          sec.focus();
-        } else {
-          sec.style.display = 'none';
-        }
-      });
-    }
+      // Ativa o botão e a seção correspondente
+      button.classList.add('active');
+      const tabId = button.dataset.tab;
+      const tabSection = document.getElementById(tabId);
+      if (tabSection) {
+        tabSection.classList.add('active');
+        tabSection.focus();
+      }
 
-    sidebarButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        activateSidebarTab(btn.dataset.tab);
-
-        // Caso o tab seja 'lordes', ativa aba lordes da direita automaticamente
-        if (btn.dataset.tab === 'lordes') {
-          activateLordTab(document.querySelector('.lord-btn.active').dataset.lord);
-        }
-      });
+      // Se ativou 'lordes', por garantia ativa o primeiro lord na barra direita
+      if(tabId === 'lordes') {
+        activateLord('malthazor');
+      } else {
+        // Se não estiver na aba lordes, remove a ativação dos lordes na barra direita e no conteúdo
+        rightButtons.forEach(btn => btn.classList.remove('active'));
+        lordDetails.forEach(ld => ld.classList.remove('active'));
+      }
     });
+  });
 
-    // Navegação barra lateral direita (lordes)
-    const lordButtons = document.querySelectorAll('.lord-btn');
-    const lordSections = document.querySelectorAll('#lordes article');
+  // Controle dos lordes na barra lateral direita
+  const rightButtons = document.querySelectorAll('.sidebar-right-btn');
+  const lordDetails = document.querySelectorAll('.lord-detail');
 
-    function activateLordTab(lordId) {
-      lordButtons.forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.lord === lordId);
-      });
-      lordSections.forEach(sec => {
-        sec.classList.toggle('active', sec.id === lordId);
-      });
+  function activateLord(lordId) {
+    rightButtons.forEach(btn => btn.classList.remove('active'));
+    lordDetails.forEach(ld => ld.classList.remove('active'));
+
+    const btn = document.querySelector(`.sidebar-right-btn[data-lord="${lordId}"]`);
+    const detail = document.getElementById(lordId);
+
+    if(btn && detail) {
+      btn.classList.add('active');
+      detail.classList.add('active');
+      detail.focus();
     }
+  }
 
-    lordButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        activateLordTab(btn.dataset.lord);
-        // Força mostrar seção dos lordes na lateral esquerda
-        activateSidebarTab('lordes');
-      });
+  rightButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      activateLord(button.dataset.lord);
     });
+  });
+</script>
 
-    // Inicializa abas padrão
-    activateSidebarTab('arco1');
-    activateLordTab('malthazor');
-  </script>
 </body>
 </html>
-
-
