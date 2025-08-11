@@ -57,6 +57,12 @@
     color: #44ff44;
     transform: scale(1.4);
   }
+  /* Aba toriel verde */
+  .sidebar-left button.active.toriel {
+    color: #4caf50;
+    transform: scale(1.4);
+  }
+
   .sidebar-left button::after {
     content: attr(title);
     position: absolute;
@@ -73,6 +79,7 @@
     box-shadow: 0 0 8px #550000aa;
     top: 50%;
     transform: translateY(-50%);
+    z-index: 100;
   }
   .sidebar-left button:hover::after {
     opacity: 1;
@@ -137,6 +144,7 @@
     box-shadow: 0 0 8px #550000aa;
     top: 50%;
     transform: translateY(-50%);
+    z-index: 100;
   }
   .sidebar-right button:hover::after {
     opacity: 1;
@@ -156,6 +164,11 @@
     font-family: 'Cinzel', serif;
     z-index: 10;
     user-select: none;
+  }
+  /* Header verde para aba toriel */
+  header.toriel {
+    color: #4caf50;
+    text-shadow: 0 0 10px #2e7d32;
   }
 
   /* Main container */
@@ -179,20 +192,22 @@
     margin-bottom: 2rem;
     animation: fadeSlideIn 0.5s ease forwards;
     outline-offset: -8px;
+    color: #eee;
   }
   section.active {
     display: block;
   }
 
-  @keyframes fadeSlideIn {
-    from {
-      opacity: 0;
-      transform: translateY(15px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  /* Seções arco - fundo claro */
+  section.arco {
+    background: #220000;
+  }
+
+  /* Seção Toriel - fundo e texto verdes */
+  section#toriel {
+    background: #0b350b;
+    color: #b5f2b5;
+    box-shadow: 0 0 25px #2e7d32;
   }
 
   /* Títulos */
@@ -202,6 +217,11 @@
     color: #ff6666;
     text-shadow: 0 0 8px #660000aa;
     margin-top: 0;
+  }
+  /* Títulos verdes na aba toriel */
+  section#toriel h1, section#toriel h2 {
+    color: #a5d6a7;
+    text-shadow: 0 0 10px #2e7d32;
   }
 
   /* Ícones antes de itens da lista */
@@ -216,6 +236,10 @@
     left: 0;
     color: #ff4444;
   }
+  /* Itens da lista na aba toriel verdes */
+  section#toriel ul li::before {
+    color: #4caf50;
+  }
 
   /* Parágrafos */
   p {
@@ -224,13 +248,13 @@
 
   /* Blockquotes */
   blockquote {
-    border-left: 6px solid #ff4444;
-    background: #33000022;
+    border-left: 6px solid #4caf50;
+    background: #144214cc;
     padding: 1rem 1.5rem;
     border-radius: 8px;
     font-style: italic;
-    color: #ff6666;
-    box-shadow: 0 0 10px #ff4444aa;
+    color: #a5d6a7;
+    box-shadow: 0 0 10px #2e7d32cc;
     margin: 1.5rem 0;
     user-select: text;
   }
@@ -279,15 +303,15 @@
 
 <!-- Barra lateral esquerda -->
 <div class="sidebar-left" role="navigation" aria-label="Menu lateral esquerdo">
-  <button class="sidebar-left-btn active" data-tab="arco1" title="Arco 1 – Traição">🌑</button>
-  <button class="sidebar-left-btn" data-tab="arco2" title="Arco 2 – Quimeras">🩸</button>
-  <button class="sidebar-left-btn" data-tab="arco3" title="Arco 3 – Jogos de Inverno">❄️</button>
-  <button class="sidebar-left-btn" data-tab="toriel" title="Personagem: Toriel Lionheart">👤</button>
+  <button class="sidebar-left-btn active arco" data-tab="arco1" title="Arco 1 – Traição">🌑</button>
+  <button class="sidebar-left-btn arco" data-tab="arco2" title="Arco 2 – Quimeras">🩸</button>
+  <button class="sidebar-left-btn arco" data-tab="arco3" title="Arco 3 – Jogos de Inverno">❄️</button>
+  <button class="sidebar-left-btn toriel" data-tab="toriel" title="Personagem: Toriel Lionheart">👤</button>
   <button class="sidebar-left-btn" data-tab="lordes" title="Nove Lordes Demoníacos">👹</button>
 </div>
 
 <!-- Barra lateral direita -->
-<div class="sidebar-right" role="navigation" aria-label="Menu lateral direito dos Lordes Demoníacos">
+<div class="sidebar-right" role="navigation" aria-label="Menu lateral direito dos Lordes Demoníacos" style="display:none;">
   <button class="sidebar-right-btn active" data-lord="malthazor" title="Mal'Thazor, o Espreitador da Carne" aria-label="Mal'Thazor">
     <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
       <path d="M4 17s1-3 3-4 3 3 3 3l-3 4-3-3zM9 9s1-4 3-5 3 4 3 4l-3 5-3-4zM15 12s1-2 3-2 3 3 3 3l-3 3-3-4z"/>
@@ -347,32 +371,29 @@
   </button>
 </div>
 
-<header>Lore da Academia Aethel</header>
+<header id="page-header">Lore da Academia Aethel</header>
 
 <main>
   <!-- Seções da barra esquerda -->
-  <section id="arco1" class="active" tabindex="0" aria-label="Arco 1 – Traição">
+  <section id="arco1" class="arco active" tabindex="0" aria-label="Arco 1 – Traição">
     <h1>Arco 1 – Traição</h1>
     <p>Os personagens são alunos recém-chegados à Academia Aethel, onde acabam se conhecendo ao seguir um misterioso tentáculo negro nos corredores da escola...</p>
   </section>
 
-  <section id="arco2" tabindex="0" aria-label="Arco 2 – Quimeras">
+  <section id="arco2" class="arco" tabindex="0" aria-label="Arco 2 – Quimeras">
     <h1>Arco 2 – Quimeras</h1>
-    <p>Enfrentando quimeras e experimentos mágicos, os personagens descobrem segredos obscuros e precisam lidar com forças além da compreensão humana.</p>
+    <p>Após os eventos da traição, os personagens enfrentam experimentos obscuros envolvendo quimeras e pactos perigosos...</p>
   </section>
 
-  <section id="arco3" tabindex="0" aria-label="Arco 3 – Jogos de Inverno">
+  <section id="arco3" class="arco" tabindex="0" aria-label="Arco 3 – Jogos de Inverno">
     <h1>Arco 3 – Jogos de Inverno</h1>
-    <p>Os personagens entram disfarçados na Academia Bayat al Nar para participar dos Jogos de Inverno, um torneio ritualístico cheio de perigos e intrigas.</p>
+    <p>Na academia Bayat al Nar, os personagens participam dos Jogos de Inverno, um torneio ritualístico com apostas que vão além do físico...</p>
   </section>
 
   <section id="toriel" tabindex="0" aria-label="Personagem Toriel Lionheart">
     <h1>Toriel Lionheart</h1>
-    <p><strong>Nome:</strong> Toriel Lionheart</p>
-    <p><strong>Nascimento:</strong> 6 de janeiro de 1483</p>
-    <p><strong>Origem:</strong> Filho do rei Lucius V Lionheart, terceiro na linha de sucessão ao trono do Brasil.</p>
-    <p><strong>Família:</strong> Irmão do príncipe herdeiro Melchior Lionheart e da princesa Cassandra Lionheart.</p>
-    <p><strong>Histórico:</strong> Toriel foi acusado injustamente do assassinato do reitor da Academia Aethel, junto com Mahrez, Elisya e Kaguya. Após a acusação, fugiu da academia e se tornou um personagem complexo, marcado por mistérios e um destino sombrio.</p>
+    <p>Toriel Lionheart, nascido em 6 de janeiro de 1483, é o terceiro na linhagem do trono do Brasil, filho do rei Lucius V Lionheart. Ele é irmão do príncipe herdeiro Melchior Lionheart e da Cassandra Lionheart.</p>
+    <p>Toriel foi acusado injustamente do assassinato do reitor da Academia Aethel, junto com Mahrez, Elisya e Kaguya. Após a acusação, fugiu da academia e se tornou um personagem complexo, marcado por mistérios e um destino sombrio.</p>
     <blockquote>
       <p>"Sempre à sombra do trono, Toriel carrega o peso da culpa que não cometeu, lutando contra a injustiça enquanto busca a verdade por trás da traição que abalou Aethel."</p>
     </blockquote>
@@ -386,11 +407,10 @@
     <p><strong>Atuação na campanha:</strong> Toriel é um NPC que pode atuar como aliado, antagonista ou figura enigmática, dependendo das decisões dos jogadores e da evolução da história.</p>
   </section>
 
-  <section id="lordes" tabindex="0" aria-label="Nove Lordes Demoníacos">
+  <section id="lordes" tabindex="0" aria-label="Nove Lordes Demoníacos" style="display:none;">
     <h1>Lordes Demoníacos</h1>
     <p>Conheça os poderosos Lordes que ameaçam o equilíbrio do mundo de Aethel. Clique nos ícones à direita para saber mais.</p>
 
-    <!-- Conteúdo individual de cada Lorde - só um aparece por vez -->
     <div id="lord-content">
       <article id="malthazor" class="lord-detail active" tabindex="0" aria-label="Mal'Thazor, o Espreitador da Carne">
         <h2>Mal'Thazor, o Espreitador da Carne</h2>
@@ -441,59 +461,91 @@
 </main>
 
 <script>
-  // Controle das abas da barra lateral esquerda
   const leftButtons = document.querySelectorAll('.sidebar-left-btn');
   const sections = document.querySelectorAll('main > section');
-
-  leftButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      // Remove 'active' de todos botões e seções
-      leftButtons.forEach(b => b.classList.remove('active'));
-      sections.forEach(sec => sec.classList.remove('active'));
-
-      // Ativa o botão e a seção correspondente
-      button.classList.add('active');
-      const tabId = button.dataset.tab;
-      const tabSection = document.getElementById(tabId);
-      if (tabSection) {
-        tabSection.classList.add('active');
-        tabSection.focus();
-      }
-
-      // Se ativou 'lordes', ativa o primeiro lord na barra direita
-      if (tabId === 'lordes') {
-        activateLord('malthazor');
-      } else {
-        // Se não estiver na aba lordes, remove ativação dos lordes na barra direita e no conteúdo
-        rightButtons.forEach(btn => btn.classList.remove('active'));
-        lordDetails.forEach(ld => ld.classList.remove('active'));
-      }
-    });
-  });
-
-  // Controle dos lordes na barra lateral direita
+  const rightSidebar = document.querySelector('.sidebar-right');
   const rightButtons = document.querySelectorAll('.sidebar-right-btn');
   const lordDetails = document.querySelectorAll('.lord-detail');
+  const lordesSection = document.getElementById('lordes');
+  const header = document.getElementById('page-header');
+
+  function deactivateAll() {
+    leftButtons.forEach(btn => btn.classList.remove('active'));
+    sections.forEach(sec => {
+      sec.classList.remove('active');
+      // Hide lordes section by default
+      if(sec.id === 'lordes') {
+        sec.style.display = 'none';
+      }
+    });
+    rightButtons.forEach(btn => btn.classList.remove('active'));
+    lordDetails.forEach(ld => ld.classList.remove('active'));
+    rightSidebar.style.display = 'none';
+  }
+
+  function activateLeftTab(tabId) {
+    deactivateAll();
+
+    // Ativar botão e seção
+    const btn = document.querySelector(`.sidebar-left-btn[data-tab="${tabId}"]`);
+    const sec = document.getElementById(tabId);
+    if(btn) btn.classList.add('active');
+    if(sec) {
+      sec.classList.add('active');
+      sec.style.display = 'block';
+      sec.focus();
+    }
+
+    // Header muda cor para toriel
+    if(tabId === 'toriel') {
+      header.classList.add('toriel');
+    } else {
+      header.classList.remove('toriel');
+    }
+
+    // Mostrar sidebar direita só na aba lordes
+    if(tabId === 'lordes') {
+      rightSidebar.style.display = 'flex';
+      // Ativa lordes: o primeiro
+      activateLord('malthazor');
+      lordesSection.style.display = 'block';
+    } else {
+      rightSidebar.style.display = 'none';
+      lordesSection.style.display = 'none';
+    }
+
+    // Os arcos aparecem só na inicial (arco1)
+    // Se a aba não for arco, esconder os arcos (já feito no deactivateAll)
+  }
 
   function activateLord(lordId) {
     rightButtons.forEach(btn => btn.classList.remove('active'));
     lordDetails.forEach(ld => ld.classList.remove('active'));
-
     const btn = document.querySelector(`.sidebar-right-btn[data-lord="${lordId}"]`);
     const detail = document.getElementById(lordId);
-
-    if (btn && detail) {
-      btn.classList.add('active');
+    if(btn) btn.classList.add('active');
+    if(detail) {
       detail.classList.add('active');
       detail.focus();
     }
   }
 
+  // Eventos clique esquerda
+  leftButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      activateLeftTab(button.dataset.tab);
+    });
+  });
+
+  // Eventos clique direita
   rightButtons.forEach(button => {
     button.addEventListener('click', () => {
       activateLord(button.dataset.lord);
     });
   });
+
+  // Inicializar: só arco1 ativo, right sidebar escondida, header padrão
+  activateLeftTab('arco1');
 </script>
 
 </body>
