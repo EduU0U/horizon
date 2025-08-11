@@ -25,6 +25,14 @@
     line-height: 1.5;
     display: flex;
     min-height: 100vh;
+    flex-direction: column;
+  }
+
+  /* Container para conteúdo principal */
+  .content-wrapper {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
   }
 
   /* Barra lateral esquerda */
@@ -145,6 +153,8 @@
     padding: 2rem;
     flex-grow: 1;
     max-width: 900px;
+    overflow-y: auto;
+    outline-offset: -8px;
   }
 
   /* Nav interna */
@@ -187,7 +197,6 @@
     box-shadow: 0 0 15px #550000aa;
     margin-bottom: 2rem;
     animation: fadeSlideIn 0.5s ease forwards;
-    outline-offset: -8px;
   }
   section.active {
     display: block;
@@ -261,8 +270,8 @@
     height: auto;
     margin: 1rem auto 2rem auto;
     border-radius: 10px;
-    border: 3px solid #ff4444;
-    box-shadow: 0 0 20px #ff4444cc;
+    border: 3px solid #44ff44;
+    box-shadow: 0 0 20px #44ff44cc;
   }
 
   /* Seção Toriel com fundo verde escuro */
@@ -383,218 +392,213 @@
 
 <header>Lore da Academia Aethel</header>
 
-<main>
-  <!-- Nav secundário (arcos) -->
-  <nav>
-    <button class="tab-btn active" data-tab="arco1">🌑 Arco 1 – Traição</button>
-    <button class="tab-btn" data-tab="arco2">🩸 Arco 2 – Quimeras</button>
-    <button class="tab-btn" data-tab="arco3">❄️ Arco 3 – Jogos de Inverno</button>
-  </nav>
+<div class="content-wrapper">
+  <main>
+    <!-- Nav secundário (arcos) -->
+    <nav>
+      <button class="tab-btn active" data-tab="arco1">🌑 Arco 1 – Traição</button>
+      <button class="tab-btn" data-tab="arco2">🩸 Arco 2 – Quimeras</button>
+      <button class="tab-btn" data-tab="arco3">❄️ Arco 3 – Jogos de Inverno</button>
+    </nav>
 
-  <!-- Conteúdo dos Arcos -->
-  <section id="arco1" tabindex="0" class="active" aria-label="Conteúdo do Arco 1">
-    <h1>🌑 Arco 1 – Traição</h1>
-    <h3>Introdução:</h3>
-    <p>Os personagens são alunos recém-chegados à Academia Aethel, onde acabam se conhecendo ao seguir um misterioso tentáculo negro nos corredores da escola.</p>
+    <!-- Conteúdo dos Arcos -->
+    <section id="arco1" tabindex="0" class="active" aria-label="Conteúdo do Arco 1">
+      <h1>🌑 Arco 1 – Traição</h1>
+      <h3>Introdução:</h3>
+      <p>Os personagens são alunos recém-chegados à Academia Aethel, onde acabam se conhecendo ao seguir um misterioso tentáculo negro nos corredores da escola.</p>
 
-    <h3>Eventos principais:</h3>
-    <ul>
-      <li>O tentáculo os leva até a sala do reitor, onde testemunham Izack matando o Reitor de Aethel.</li>
-      <li>Izack desaparece, e os alunos são pegos ao lado do corpo. Toda a academia os vê como culpados.</li>
-      <li>Eles fogem e tornam-se procurados pelo reino.</li>
-      <li>Refugiam-se na cidade de Fausto, mas descobrem que é uma ilusão construída por Izack — um estômago mágico que consome pessoas através do medo, corpo e alma.</li>
-      <li>Escapam de Fausto, mas são interceptados pelo General Francesco Lionheart, tio de Toriel, que tenta prendê-los.</li>
-      <li>A Legião Abissal aparece (Homem Pálido, Cirurgião, Homem do Elmo), provocando uma batalha caótica.</li>
-      <li>Elise, uma integrante da Legião, salva os jogadores e os leva até um laboratório subterrâneo.</li>
-    </ul>
-  </section>
+      <h3>Eventos principais:</h3>
+      <ul>
+        <li>O tentáculo os leva até a sala do reitor, onde testemunham Izack matando o Reitor de Aethel.</li>
+        <li>Izack desaparece, e os alunos são pegos ao lado do corpo. Toda a academia os vê como culpados.</li>
+        <li>Eles fogem e tornam-se procurados pelo reino.</li>
+        <li>Refugiam-se na cidade de Fausto, mas descobrem que é uma ilusão construída por Izack — um estômago mágico que consome pessoas através do medo, corpo e alma.</li>
+        <li>Escapam de Fausto, mas são interceptados pelo General Francesco Lionheart, tio de Toriel, que tenta prendê-los.</li>
+        <li>A Legião Abissal aparece (Homem Pálido, Cirurgião, Homem do Elmo), provocando uma batalha caótica.</li>
+        <li>Elise, uma integrante da Legião, salva os jogadores e os leva até um laboratório subterrâneo.</li>
+      </ul>
+    </section>
 
-  <section id="arco2" tabindex="0" aria-label="Conteúdo do Arco 2">
-    <h1>🩸 Arco 2 – Quimeras, Experimentos e Verdades Escondidas</h1>
-    <p>Detalhes e eventos do segundo arco da campanha (ainda a completar)...</p>
-  </section>
+    <section id="arco2" tabindex="0" aria-label="Conteúdo do Arco 2">
+      <h1>🩸 Arco 2 – Quimeras, Experimentos e Verdades Escondidas</h1>
+      <h3>Introdução:</h3>
+      <p>Os jogadores descobrem segredos obscuros sobre experimentos com quimeras e a verdadeira natureza da Academia.</p>
 
-  <section id="arco3" tabindex="0" aria-label="Conteúdo do Arco 3">
-    <h1>❄️ Arco 3 – Jogos de Inverno</h1>
-    <p>Detalhes e eventos do terceiro arco da campanha (ainda a completar)...</p>
-  </section>
+      <h3>Eventos principais:</h3>
+      <ul>
+        <li>Descoberta do laboratório subterrâneo e seus horrores.</li>
+        <li>Encontro com Kaguya e pactos feitos com relíquias antigas.</li>
+        <li>Batalha contra membros da Legião Abissal e perda de Elise.</li>
+        <li>Viagem no tempo para uma versão passada da Academia.</li>
+        <li>Encontro com ancestrais e revelações de Aethel.</li>
+      </ul>
+    </section>
 
-  <!-- Toriel Lionheart -->
-  <section id="toriel" class="toriel" tabindex="0" aria-label="Biografia da personagem Toriel Lionheart">
-    <h1>👤 Toriel Lionheart</h1>
-    <img src="https://i.imgur.com/U2Rvq2H.png" alt="Imagem de Toriel Lionheart" class="toriel-img" />
-    <p>Toriel Lionheart nasceu em um reino próspero, filho de uma dinastia real marcada por intrigas e traições. Cresceu sob a sombra do irmão mais velho, o príncipe Melchior, herdeiro do trono. Desde jovem, Toriel mostrou uma determinação e inteligência incomuns, características que o levaram a ser estudioso das artes místicas e das políticas do reino.</p>
-    <p>Com o passar dos anos, Toriel tornou-se uma figura respeitada e temida, por seu senso de justiça rígido e sua habilidade com magia ancestral. Foi designado para proteger os segredos da Academia Aethel, além de investigar as forças obscuras que ameaçam o equilíbrio do reino.</p>
-    <blockquote>
-      "A verdade não se revela aos fracos de coração, mas aos que ousam enfrentar as trevas de frente."
-    </blockquote>
-    <p>Sua trajetória é marcada por alianças frágeis e batalhas silenciosas contra aqueles que querem corromper o mundo. Toriel carrega a esperança de restaurar a honra da dinastia Lionheart, mesmo que isso custe tudo o que ama.</p>
-  </section>
+    <section id="arco3" tabindex="0" aria-label="Conteúdo do Arco 3">
+      <h1>❄️ Arco 3 – Jogos de Inverno</h1>
+      <h3>Introdução:</h3>
+      <p>Os personagens estão infiltrados na Academia Bayat al Nar, participando de um torneio ritualístico enquanto enfrentam a Trupe dos Sete Espinhos.</p>
 
-</main>
+      <h3>Eventos principais:</h3>
+      <ul>
+        <li>Disfarce como alunos de intercâmbio para obter uniformes.</li>
+        <li>Participação nos Jogos de Inverno e desafios brutais.</li>
+        <li>Interações tensas com a Trupe dos Sete Espinhos.</li>
+        <li>Punição permanente de Mahrez, substituindo seus pulmões por areia viva.</li>
+      </ul>
+    </section>
 
-<script>
-  // Controle dos botões laterais esquerdos (arcos e Toriel)
-  const sidebarButtons = document.querySelectorAll('.sidebar-btn');
-  const tabButtons = document.querySelectorAll('.tab-btn');
-  const sections = document.querySelectorAll('main section');
+    <!-- Seção exclusiva: Toriel -->
+    <section id="toriel" tabindex="0" class="toriel" aria-label="Ficha e história do personagem Toriel Lionheart">
+      <h1>👤 Toriel Lionheart</h1>
+      <img src="https://i.imgur.com/tXajPY6.png" alt="Imagem do personagem Toriel Lionheart" class="toriel-img" />
+      <h3>Informações básicas</h3>
+      <ul>
+        <li>Nome completo: Toriel Lionheart</li>
+        <li>Nascimento: 6 de janeiro de 1483</li>
+        <li>Filiação: Filho do rei Lucius V Lionheart</li>
+        <li>Posição na família: Terceiro na linhagem do trono, irmão do príncipe herdeiro Melchior Lionheart e da princesa Cassandra Lionheart</li>
+        <li>Status: Acusado injustamente de assassinar o reitor junto com Mahrez, Elisya e Kaguya</li>
+      </ul>
 
-  function activateTab(tabName) {
-    // Remove active de todos
-    sidebarButtons.forEach(btn => btn.classList.remove('active'));
-    tabButtons.forEach(btn => btn.classList.remove('active'));
-    sections.forEach(sec => sec.classList.remove('active'));
+      <h3>História</h3>
+      <p>Toriel Lionheart nasceu em um reino próspero, filho de uma dinastia real marcada por intrigas e traições. Cresceu sob a sombra do irmão mais velho, o príncipe Melchior, herdeiro do trono. Desde jovem, Toriel mostrou-se determinado, inteligente e dotado de grande carisma, o que o levou a ser admirado e temido em igual medida.</p>
 
-    // Ativa os correspondentes
-    const sidebarBtn = document.querySelector(`.sidebar-btn[data-tab="${tabName}"]`);
-    if (sidebarBtn) sidebarBtn.classList.add('active');
+      <p>Aos 16 anos, durante um período turbulento, foi acusado falsamente de conspiração contra o reino. Para evitar um escândalo que pudesse desestabilizar a monarquia, seu pai, o rei Lucius V, o enviou para a Academia Aethel, onde acreditava-se que Toriel poderia ser moldado e reabilitado. Lá, Toriel destacou-se por seu talento natural em artes arcanas e estratégia, mas manteve sempre uma aura de mistério.</p>
 
-    const tabBtn = document.querySelector(`.tab-btn[data-tab="${tabName}"]`);
-    if (tabBtn) tabBtn.classList.add('active');
+      <blockquote>"Eu não busco poder pela glória, mas pela justiça que nunca me foi dada."</blockquote>
 
-    const sec = document.getElementById(tabName);
-    if (sec) sec.classList.add('active');
-  }
+      <p>Durante os eventos trágicos da morte do reitor da Academia, Toriel foi acusado injustamente junto aos seus companheiros, o que levou a uma série de eventos que colocaram sua vida e honra em risco. Apesar disso, mantém-se firme em sua luta para provar sua inocência e proteger aqueles que ama.</p>
 
-  sidebarButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      activateTab(btn.dataset.tab);
-    });
-  });
-  tabButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      activateTab(btn.dataset.tab);
-    });
-  });
+      <h3>Características e habilidades</h3>
+      <ul>
+        <li>Intelecto aguçado e conhecimento avançado em magia de manipulação temporal.</li>
+        <li>Habilidades em combate corpo a corpo e uso de lâminas curtas.</li>
+        <li>Carisma elevado, capaz de liderar e influenciar grupos.</li>
+        <li>Resiliência mental, suportando pressão extrema sem perder a compostura.</li>
+      </ul>
 
-  // Controle dos botões laterais direitos (Lordes Demoníacos)
-  const lordButtons = document.querySelectorAll('.lord-btn');
+      <h3>Citações</h3>
+      <blockquote>"Mesmo no silêncio das sombras, a verdade encontra seu caminho."</blockquote>
+      <blockquote>"Nenhuma mentira pode resistir à luz da perseverança."</blockquote>
+    </section>
 
-  // Dados dos Lordes Demoníacos
-  const lordDescriptionsData = {
-    malthazor: {
-      title: "Mal'Thazor, o Espreitador da Carne",
-      content: `
-        <p><strong>Domínio:</strong> Luxúria Sangrenta e Mutabilidade Corpórea</p>
-        <p><strong>Símbolos:</strong> Garras entrelaçadas, olhos cerrados</p>
-        <p><strong>Oferenda:</strong> Fragmentos de pele arrancados sob desejo intenso</p>
-      `
-    },
-    vhoraketh: {
-      title: "Vhor'Aketh, o Ceifador do Tempo Esquecido",
-      content: `
-        <p><strong>Domínio:</strong> Entropia Temporal e Memória Corroída</p>
-        <p><strong>Símbolos:</strong> Ampulheta quebrada, espiral invertida</p>
-        <p><strong>Oferenda:</strong> Lembranças escritas e consumidas em velas negras</p>
-      `
-    },
-    zennorkai: {
-      title: "Zennor'Kai, o Riso Sepulcral",
-      content: `
-        <p><strong>Domínio:</strong> Loucura, Paranoia e Comédia Cruel</p>
-        <p><strong>Símbolos:</strong> Máscaras rachadas, moinhos de vento parados</p>
-        <p><strong>Oferenda:</strong> Gargalhadas forçadas diante do próprio reflexo</p>
-      `
-    },
-    liranach: {
-      title: "Lir'Anach, o Lamento dos Lares",
-      content: `
-        <p><strong>Domínio:</strong> Desespero Doméstico e Ruína Emocional</p>
-        <p><strong>Símbolos:</strong> Bonecas partidas, janelas trancadas</p>
-        <p><strong>Oferenda:</strong> Cartas de amor rasgadas e molhadas em lágrimas</p>
-      `
-    },
-    ogrionthul: {
-      title: "Ogrion'Thul, o Engolidor de Pactos",
-      content: `
-        <p><strong>Domínio:</strong> Corrupção Mágica e Traição Arcana</p>
-        <p><strong>Símbolos:</strong> Contratos manchados de sangue, pergaminhos devorados</p>
-        <p><strong>Oferenda:</strong> Juramentos quebrados escritos com o próprio sangue</p>
-      `
-    },
-    baelvureth: {
-      title: "Bael'Vureth, o Chacô do Sopro Final",
-      content: `
-        <p><strong>Domínio:</strong> Agonia Respiratória e Medo Terminal</p>
-        <p><strong>Símbolos:</strong> Pulmões em chamas, sinos de bronze</p>
-        <p><strong>Oferenda:</strong> O último suspiro de um moribundo</p>
-      `
-    },
-    syranom: {
-      title: "Syra'Nom, a Mãe das Correntes",
-      content: `
-        <p><strong>Domínio:</strong> Escravidão Mental e Privação Sensorial</p>
-        <p><strong>Símbolos:</strong> Algemas abertas, olhos vendados</p>
-        <p><strong>Oferenda:</strong> Três dias de silêncio absoluto em cela escura</p>
-      `
-    },
-    drethmur: {
-      title: "Dreth'Mur, o Jantar dos Condenados",
-      content: `
-        <p><strong>Domínio:</strong> Degradação Culinária e Canibalismo Rituálico</p>
-        <p><strong>Símbolos:</strong> Talheres enferrujados, pratos vazios</p>
-        <p><strong>Oferenda:</strong> Um banquete onde se coma da própria carne em delírio</p>
-      `
-    },
-    kzzarun: {
-      title: "Kz'Zarun, o Dente da Terra Subversa",
-      content: `
-        <p><strong>Domínio:</strong> Putrefação Geológica e Tremores Hereges</p>
-        <p><strong>Símbolos:</strong> Pedras sangrentas, mapas rasgados</p>
-        <p><strong>Oferenda:</strong> Enterrar um espírito consciente sob sal negro e cinzas</p>
-      `
-    }
-  };
+    <!-- Seções dos Lordes Demoníacos -->
+    <section id="malthazor" aria-label="Mal'Thazor, o Espreitador da Carne">
+      <h1>Mal'Thazor, o Espreitador da Carne</h1>
+      <p>Mal'Thazor é um dos Nove Lordes Demoníacos, conhecido por sua fome insaciável e domínio sobre a carne viva e seus tormentos. Suas presenças menores são mantidas em formas grotescas até que sejam plenamente alimentadas para manifestar seu poder completo.</p>
+      <ul>
+        <li>Antirrelíquia: "Garras de Mal'Thazor" — uma arma que corrói a carne dos inimigos ao contato.</li>
+        <li>Comida favorita: Carne fresca de vítimas corrompidas.</li>
+      </ul>
+    </section>
 
-  // Criar container para as descrições dos lordes (abaixo do conteúdo principal)
-  const main = document.querySelector('main');
-  const lordContainer = document.createElement('section');
-  lordContainer.id = "lordes-demoníacos";
-  lordContainer.setAttribute('tabindex', '0');
-  lordContainer.setAttribute('aria-label', 'Descrição dos Nove Lordes Demoníacos');
-  lordContainer.style.background = '#1a1a1a';
-  lordContainer.style.padding = '2rem';
-  lordContainer.style.borderRadius = '12px';
-  lordContainer.style.boxShadow = '0 0 15px #550000aa';
-  lordContainer.style.marginBottom = '2rem';
-  lordContainer.style.color = '#ff6666';
+    <section id="vhoraketh" aria-label="Vhor'Aketh, o Ceifador do Tempo Esquecido">
+      <h1>Vhor'Aketh, o Ceifador do Tempo Esquecido</h1>
+      <p>Este lorde manipula o tempo, colhendo vidas no fluxo esquecido da existência. Seus pactos causam danos não apenas físicos, mas também à continuidade temporal dos seus inimigos.</p>
+    </section>
 
-  // Inicializa com Mal'Thazor
-  lordContainer.innerHTML = `
-    <h1>💀 Nove Lordes Demoníacos</h1>
-    <h2>${lordDescriptionsData.malthazor.title}</h2>
-    ${lordDescriptionsData.malthazor.content}
-  `;
-  main.appendChild(lordContainer);
+    <section id="zennorkai" aria-label="Zennor'Kai, o Riso Sepulcral">
+      <h1>Zennor'Kai, o Riso Sepulcral</h1>
+      <p>Entidade que manipula a loucura e o desespero, provocando risadas macabras que enlouquecem seus adversários lentamente.</p>
+    </section>
 
-  // Função para atualizar descrição ao clicar no Lorde
-  lordButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      // Remove active dos botões
-      lordButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+    <section id="liranach" aria-label="Lir'Anach, o Lamento dos Lares">
+      <h1>Lir'Anach, o Lamento dos Lares</h1>
+      <p>Assombra os lares, trazendo tristeza profunda e distorção emocional nas famílias, alimentando-se do sofrimento humano.</p>
+    </section>
 
-      const key = btn.dataset.lord;
-      const data = lordDescriptionsData[key];
-      if(data) {
-        lordContainer.innerHTML = `
-          <h1>💀 Nove Lordes Demoníacos</h1>
-          <h2>${data.title}</h2>
-          ${data.content}
-        `;
-        lordContainer.focus();
-      }
-    });
-  });
+    <section id="ogrionthul" aria-label="Ogrion'Thul, o Engolidor de Pactos">
+      <h1>Ogrion'Thul, o Engolidor de Pactos</h1>
+      <p>Este lorde devora os pactos feitos com ele, consumindo a energia vital de seus servos quando estes falham em cumprir seus acordos.</p>
+    </section>
 
-  // Inicializa ativando Arco 1 e Mal'Thazor
-  activateTab('arco1');
-  lordButtons[0].classList.add('active');
-</script>
+    <section id="baelvureth" aria-label="Bael'Vureth, o Chacô do Sopro Final">
+      <h1>Bael'Vureth, o Chacô do Sopro Final</h1>
+      <p>Controla os ventos da morte, sua presença é precedida pelo silêncio da respiração final.</p>
+    </section>
+
+    <section id="syranom" aria-label="Syra'Nom, a Mãe das Correntes">
+      <h1>Syra'Nom, a Mãe das Correntes</h1>
+      <p>Manipula correntes e laços, prendendo almas e corpos em suas malhas infernais.</p>
+    </section>
+
+    <section id="drethmur" aria-label="Dreth'Mur, o Jantar dos Condenados">
+      <h1>Dreth'Mur, o Jantar dos Condenados</h1>
+      <p>Senhor dos banquetes macabros, alimenta-se da desgraça dos condenados eternos.</p>
+    </section>
+
+    <section id="kzzarun" aria-label="Kz'Zarun, o Dente da Terra Subversa">
+      <h1>Kz'Zarun, o Dente da Terra Subversa</h1>
+      <p>Representa a corrosão e a podridão do solo, desestabilizando o mundo físico e espiritual.</p>
+    </section>
+
+  </main>
+</div>
 
 <footer>
-  Academia Aethel © 2025 — Todos os direitos reservados.
+  Academia Aethel &copy; 2025 — Todos os direitos reservados.
 </footer>
+
+<script>
+  // Troca abas lado esquerdo (arcos + toriel)
+  const sidebarBtns = document.querySelectorAll('.sidebar-btn');
+  const tabBtns = document.querySelectorAll('nav .tab-btn');
+  const sections = document.querySelectorAll('main > section');
+
+  function activateTab(tabName) {
+    // Atualiza sidebar esquerda
+    sidebarBtns.forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.tab === tabName);
+    });
+    // Atualiza nav interna dos arcos (se for arco)
+    tabBtns.forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.tab === tabName);
+    });
+    // Mostra a seção correspondente, esconde as outras
+    sections.forEach(sec => {
+      sec.classList.toggle('active', sec.id === tabName);
+    });
+  }
+
+  sidebarBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      activateTab(btn.dataset.tab);
+    });
+  });
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      activateTab(btn.dataset.tab);
+    });
+  });
+
+  // Troca abas Lordes Demoníacos na barra direita
+  const lordBtns = document.querySelectorAll('.lord-btn');
+  lordBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Remove active de todos lordes
+      lordBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Exibir só a seção do lorde clicado, esconder outras seções de lordes
+      sections.forEach(sec => {
+        // se for uma seção de lord demoníaco
+        if (sec.id && [...lordBtns].some(b => b.dataset.lord === sec.id)) {
+          sec.classList.toggle('active', sec.id === btn.dataset.lord);
+        }
+      });
+
+      // Tirar active das abas do lado esquerdo pra não confundir visualmente
+      sidebarBtns.forEach(btn => btn.classList.remove('active'));
+      tabBtns.forEach(btn => btn.classList.remove('active'));
+    });
+  });
+
+  // Por padrão, ativar a primeira lord (opcional: ativar nenhuma)
+  // lordBtns[0].classList.add('active');
+
+</script>
 
 </body>
 </html>
