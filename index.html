@@ -142,6 +142,17 @@
     color: #bbffbb;
   }
 
+  .toriel-img {
+    display: block;
+    max-width: 300px;
+    width: 100%;
+    height: auto;
+    margin: 1rem auto 2rem auto;
+    border-radius: 10px;
+    box-shadow: 0 0 15px #44ff4499;
+    border: 2px solid #44ff44aa;
+  }
+
   h1, h2, h3 {
     color: #ff6666;
     text-shadow: 0 0 6px #660000aa;
@@ -357,75 +368,71 @@
     <h3>Origem e Família</h3>
     <p>Toriel Lionheart nasceu em <strong>6 de janeiro de 1483</strong>, terceiro na linha de sucessão ao trono do Brasil, governado pela poderosa dinastia Lionheart. Filho do rei <strong>Lucius V Lionheart</strong> e irmão do príncipe herdeiro <strong>Melchior</strong> e da princesa <strong>Cassandra</strong>, sempre foi o “patinho feio” da realeza.</p>
 
+    <img src="toriel.png.png" alt="Toriel Lionheart" class="toriel-img" />
+
     <h3>Personalidade e Aparência</h3>
-    <p>Magro, frágil e de saúde delicada, Toriel é <em>medroso, provocador e sarcástico</em>. Usa ironia como escudo contra a insegurança, o que o torna impopular e isolado.</p>
+    <p>Magro, com olhos intensos e cabelos negros, Toriel tem uma postura séria, mas carrega uma chama interior de rebeldia. Sua expressão frequentemente mostra cansaço, fruto das pressões do palácio e da traição que sofreu.</p>
 
-    <h3>O Incidente e a Fuga</h3>
-    <p>Acusado injustamente, junto com Mahrez, Elisya e Kaguya, do assassinato do Reitor da Academia Aethel, Toriel precisou fugir. Atualmente, vive como um fugitivo, perseguido por agentes reais e por inimigos misteriosos.</p>
+    <h3>Acusações e Fuga</h3>
+    <p>Acusado injustamente de participar do assassinato do Reitor da Academia Aethel junto com Mahrez, Elisya e Kaguya, Toriel foi forçado a fugir, deixando para trás sua família e seu título real.</p>
 
-    <h3>Relacionamentos</h3>
-    <ul>
-      <li><strong>Melchior Lionheart:</strong> Irmão mais velho, herdeiro direto do trono, orgulhoso e implacável.</li>
-      <li><strong>Cassandra Lionheart:</strong> Irmã mais nova, ligada aos círculos políticos da corte.</li>
-      <li><strong>General Francesco Lionheart:</strong> Tio severo, caçador dos fugitivos.</li>
-    </ul>
+    <h3>Habilidades e Alianças</h3>
+    <p>Durante a fuga, Toriel desenvolveu habilidades mágicas únicas, com especial foco em manipulação de mana e combate corpo a corpo. Ele formou laços com outros fugitivos, incluindo os protagonistas do RPG, unindo forças para derrubar Izack e revelar a verdade por trás da traição.</p>
 
-    <h3>Habilidades</h3>
-    <ul>
-      <li>Domínio de magia defensiva e ilusória.</li>
-      <li>Conhecimento profundo em história da Academia Aethel.</li>
-      <li>Capacidade de infiltração e fuga.</li>
-    </ul>
-
-    <h3>Citações Marcantes</h3>
-    <blockquote>“Melhor ser um cão ferido do que um leão morto.”</blockquote>
-    <blockquote>“A traição é apenas um jogo para quem sabe as regras.”</blockquote>
+    <h3>Motivações e Conflitos</h3>
+    <p>Além de limpar seu nome, Toriel luta contra seu próprio sentimento de abandono pela família e pela coroa. Sua ambição é recuperar a honra dos Lionheart e proteger aqueles que ama, mesmo que para isso precise andar na linha tênue entre a justiça e a vingança.</p>
   </section>
-
 </main>
 
 <script>
-  // Seleção dos botões da sidebar e nav
-  const sidebarBtns = document.querySelectorAll('.sidebar-btn');
-  const tabBtns = document.querySelectorAll('nav .tab-btn');
-  const sections = document.querySelectorAll('main section');
+  // Controle das abas laterais
+  const sidebarButtons = document.querySelectorAll('.sidebar-btn');
+  const sections = document.querySelectorAll('section');
 
-  function ativarAba(tab) {
-    // Remove active dos botões sidebar e nav
-    sidebarBtns.forEach(btn => btn.classList.remove('active'));
-    tabBtns.forEach(btn => btn.classList.remove('active'));
-    // Remove active das seções
-    sections.forEach(sec => sec.classList.remove('active'));
-
-    // Ativa botão sidebar que tenha data-tab = tab
-    const sidebarBtn = [...sidebarBtns].find(b => b.dataset.tab === tab);
-    if (sidebarBtn) sidebarBtn.classList.add('active');
-
-    // Ativa botão nav (se existir)
-    const navBtn = [...tabBtns].find(b => b.dataset.tab === tab);
-    if (navBtn) navBtn.classList.add('active');
-
-    // Ativa a seção
-    const sec = document.getElementById(tab);
-    if (sec) sec.classList.add('active');
-  }
-
-  // Clique nos botões da sidebar
-  sidebarBtns.forEach(btn => {
+  sidebarButtons.forEach(btn => {
     btn.addEventListener('click', () => {
-      ativarAba(btn.dataset.tab);
+      sidebarButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const target = btn.getAttribute('data-tab');
+
+      sections.forEach(sec => {
+        if (sec.id === target) {
+          sec.classList.add('active');
+          sec.focus();
+        } else {
+          sec.classList.remove('active');
+        }
+      });
     });
   });
 
-  // Clique nos botões da nav (arcos)
-  tabBtns.forEach(btn => {
+  // Controle das abas internas (arcos)
+  const tabButtons = document.querySelectorAll('nav .tab-btn');
+  const arcoSections = ['arco1', 'arco2', 'arco3'];
+
+  tabButtons.forEach(btn => {
     btn.addEventListener('click', () => {
-      ativarAba(btn.dataset.tab);
+      tabButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const target = btn.getAttribute('data-tab');
+
+      arcoSections.forEach(id => {
+        const sec = document.getElementById(id);
+        if (id === target) {
+          sec.classList.add('active');
+          sec.focus();
+        } else {
+          sec.classList.remove('active');
+        }
+      });
     });
   });
 </script>
 
 </body>
 </html>
+
 
 
