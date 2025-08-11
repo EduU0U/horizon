@@ -9,17 +9,100 @@
   *, *::before, *::after {
     box-sizing: border-box;
   }
-  body {
+  html, body {
     margin: 0; 
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: #121212;
     color: #eee;
     line-height: 1.5;
     scroll-behavior: smooth;
+    height: 100%;
+  }
+  body {
+    display: flex;
+  }
+  /* Sidebar vertical para personagens */
+  #sidebar {
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    width: 60px;
+    background: #1a1a1a;
+    border-right: 2px solid #117a65; /* verde neutro */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0;
+    z-index: 20;
+  }
+  #sidebar button#toggleSidebar {
+    background: transparent;
+    border: none;
+    color: #117a65;
+    cursor: pointer;
+    padding: 0;
+    margin-bottom: 2rem;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #sidebar button#toggleSidebar svg {
+    width: 24px;
+    height: 24px;
+    fill: #117a65;
+    transition: transform 0.3s ease;
+  }
+  #sidebar button#toggleSidebar.open svg {
+    transform: rotate(180deg);
+  }
+  #characterList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 160px;
+    background: #153c2f; /* verde escuro neutro */
+    border-radius: 0 8px 8px 0;
+    box-shadow: 0 0 12px #117a65aa;
+    overflow-y: auto;
+    max-height: 90vh;
+    transform: translateX(-110%);
+    transition: transform 0.3s ease;
+  }
+  #characterList.open {
+    transform: translateX(0);
+  }
+  #characterList li {
+    border-bottom: 1px solid #0e2a1f;
+  }
+  #characterList li button {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: transparent;
+    border: none;
+    color: #b1d8c7;
+    text-align: left;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+  }
+  #characterList li button:hover,
+  #characterList li button.active {
+    background: #117a65;
+    color: #e0f2f1;
+  }
+  /* Container principal, deslocado pela sidebar */
+  #contentWrapper {
+    margin-left: 60px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
   }
   header {
     position: fixed;
-    top: 0; left: 0; right: 0;
+    top: 0; left: 60px; right: 0;
     background: #1a1a1a;
     padding: 1rem;
     text-align: center;
@@ -36,6 +119,7 @@
     padding: 2rem;
     border-radius: 8px;
     box-shadow: 0 0 25px #440000cc;
+    flex: 1;
   }
   nav {
     display: flex;
@@ -119,161 +203,173 @@
       padding: 0.5rem 1rem;
       font-size: 0.9rem;
     }
+    #sidebar {
+      width: 50px;
+    }
+    #contentWrapper {
+      margin-left: 50px;
+    }
+    #characterList {
+      width: 140px;
+    }
+  }
+  /* Tema verde neutro para Toriel */
+  body.toriel-theme {
+    background: #0b2f1a;
+    color: #cce8d6;
+  }
+  body.toriel-theme header {
+    background: #114d2c;
+    color: #a4d29f;
+    text-shadow: 0 0 8px #2a7a40;
+  }
+  body.toriel-theme main {
+    background: #165732;
+    box-shadow: 0 0 25px #2a7a4055;
+  }
+  body.toriel-theme nav button {
+    border-color: #a4d29f;
+    color: #a4d29f;
+  }
+  body.toriel-theme nav button:hover:not(.active) {
+    background: #a4d29f;
+    color: #0b2f1a;
+  }
+  body.toriel-theme nav button.active {
+    background: #a4d29f;
+    color: #0b2f1a;
+  }
+  body.toriel-theme blockquote {
+    border-left-color: #a4d29f;
+    color: #d1e8ca;
   }
 </style>
 </head>
 <body>
 
-<header>Lore da Academia Aethel</header>
-
-<main>
-  <nav>
-    <button class="tab-btn active" data-tab="arco1">🌑 Arco 1 – Traição</button>
-    <button class="tab-btn" data-tab="arco2">🩸 Arco 2 – Quimeras</button>
-    <button class="tab-btn" data-tab="arco3">❄️ Arco 3 – Jogos de Inverno</button>
-  </nav>
-
-  <section id="arco1" class="active" tabindex="0">
-    <h1>🌑 Arco 1 – Traição</h1>
-    <h3>Introdução:</h3>
-    <p>Os personagens são alunos recém-chegados à Academia Aethel, onde acabam se conhecendo ao seguir um misterioso tentáculo negro nos corredores da escola.</p>
-
-    <h3>Eventos principais:</h3>
-    <ul>
-      <li>O tentáculo os leva até a sala do reitor, onde testemunham Izack matando o Reitor de Aethel.</li>
-      <li>Izack desaparece, e os alunos são pegos ao lado do corpo. Toda a academia os vê como culpados.</li>
-      <li>Eles fogem e tornam-se procurados pelo reino.</li>
-      <li>Refugiam-se na cidade de Fausto, mas descobrem que é uma ilusão construída por Izack — um estômago mágico que consome pessoas através do medo, corpo e alma.</li>
-      <li>Escapam de Fausto, mas são interceptados pelo General Francesco Lionheart, tio de Toriel, que tenta prendê-los.</li>
-      <li>A Legião Abissal aparece (Homem Pálido, Cirurgião, Homem do Elmo), provocando uma batalha caótica.</li>
-      <li>Elise, uma integrante da Legião, salva os jogadores e os leva até um laboratório subterrâneo.</li>
+  <!-- Barra lateral vertical -->
+  <aside id="sidebar" aria-label="Menu de Personagens">
+    <button id="toggleSidebar" aria-expanded="false" aria-controls="characterList" title="Mostrar/Ocultar Personagens">
+      <!-- Ícone de pessoa estilizado (busto) -->
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+      </svg>
+    </button>
+    <ul id="characterList" tabindex="0" hidden>
+      <li><button data-character="toriel" aria-pressed="false">Toriel Lionheart</button></li>
+      <!-- Futuramente pode adicionar mais personagens aqui -->
     </ul>
-  </section>
+  </aside>
 
-  <section id="arco2" tabindex="0">
-    <h1>🩸 Arco 2 – Quimeras, Experimentos e Verdades Escondidas</h1>
+  <div id="contentWrapper">
+    <header>Lore da Academia Aethel</header>
 
-    <h3>Protocolo da Dor & Evangelho da Última Quimera:</h3>
-    <ul>
-      <li>No esconderijo, os jogadores veem experimentos grotescos: transformações humanas em quimeras.</li>
-      <li>São derrotados e acordam pendurados em uma sala viva, cercada de carne pulsante e embriões.</li>
-      <li>Descobrem que Kaguya foi alvo de experimentos para fundi-la com a espada Chiketsu Kotsuken.</li>
-      <li>Kaguya invade o laboratório e sela um pacto sangrento com a espada.</li>
-    </ul>
+    <main>
+      <nav aria-label="Navegação por Arcos">
+        <button class="tab-btn active" data-tab="arco1" aria-selected="true" role="tab" tabindex="0">🌑 Arco 1 – Traição</button>
+        <button class="tab-btn" data-tab="arco2" aria-selected="false" role="tab" tabindex="-1">🩸 Arco 2 – Quimeras</button>
+        <button class="tab-btn" data-tab="arco3" aria-selected="false" role="tab" tabindex="-1">❄️ Arco 3 – Jogos de Inverno</button>
+      </nav>
 
-    <h3>Luta feroz contra a Legião:</h3>
-    <ul>
-      <li>Kaguya mata o Homem do Elmo com seus espinhos.</li>
-      <li>Zarkov derrota os Irmãos Amaldiçoados.</li>
-      <li>Mahrez corta as mãos do Cirurgião, que foge.</li>
-    </ul>
+      <section id="arco1" class="active" tabindex="0" role="tabpanel" aria-labelledby="arco1-tab">
+        <h1>🌑 Arco 1 – Traição</h1>
+        <h3>Introdução:</h3>
+        <p>Os personagens são alunos recém-chegados à Academia Aethel, onde acabam se conhecendo ao seguir um misterioso tentáculo negro nos corredores da escola.</p>
 
-    <p>Elise se rebela contra Izack, mas já é tarde: o apóstolo Jazida, um abissal puro, desperta e a mata absorvendo sua alma.</p>
+        <h3>Eventos principais:</h3>
+        <ul>
+          <li>O tentáculo os leva até a sala do reitor, onde testemunham Izack matando o Reitor de Aethel.</li>
+          <li>Izack desaparece, e os alunos são pegos ao lado do corpo. Toda a academia os vê como culpados.</li>
+          <li>Eles fogem e tornam-se procurados pelo reino.</li>
+          <li>Refugiam-se na cidade de Fausto, mas descobrem que é uma ilusão construída por Izack — um estômago mágico que consome pessoas através do medo, corpo e alma.</li>
+          <li>Escapam de Fausto, mas são interceptados pelo General Francesco Lionheart, tio de Toriel, que tenta prendê-los.</li>
+          <li>A Legião Abissal aparece (Homem Pálido, Cirurgião, Homem do Elmo), provocando uma batalha caótica.</li>
+          <li>Elise, uma integrante da Legião, salva os jogadores e os leva até um laboratório subterrâneo.</li>
+        </ul>
+      </section>
 
-    <p>Os heróis escapam por uma distorção e acordam em uma versão passada da própria Aethel.</p>
+      <section id="arco2" tabindex="0" role="tabpanel" aria-labelledby="arco2-tab">
+        <h1>🩸 Arco 2 – Quimeras, Experimentos e Verdades Escondidas</h1>
 
-    <p>Percebem que estão nos corpos de seus ancestrais.</p>
-  </section>
+        <h3>Protocolo da Dor & Evangelho da Última Quimera:</h3>
+        <ul>
+          <li>No esconderijo, os jogadores veem experimentos grotescos: transformações humanas em quimeras.</li>
+          <li>São derrotados e acordam pendurados em uma sala viva, cercada de carne pulsante e embriões.</li>
+          <li>Descobrem que Kaguya foi alvo de experimentos para fundi-la com a espada Chiketsu Kotsuken.</li>
+          <li>Kaguya invade o laboratório e sela um pacto sangrento com a espada.</li>
+        </ul>
 
-  <section id="arco3" tabindex="0">
-    <h1>❄️ Arco 3 – Jogos de Inverno</h1>
+        <h3>Luta feroz contra a Legião:</h3>
+        <ul>
+          <li>Kaguya mata o Homem do Elmo com seus espinhos.</li>
+          <li>Zarkov derrota os Irmãos Amaldiçoados.</li>
+          <li>Mahrez corta as mãos do Cirurgião, que foge.</li>
+        </ul>
 
-    <h3>Sessão 1 – Boas-Vindas aos Condenados</h3>
+        <p>Elise se rebela contra Izack, mas já é tarde: o apóstolo Jazida, um abissal puro, desperta e a mata absorvendo sua alma.</p>
 
-    <p><strong>➤ Parte 1: A Jornada à Arábia</strong></p>
-    <p>O grupo, após reunir os heróis restantes Arabella e Eleonor, é enviado com urgência para a Arábia, terra natal de Mahrez, agora tomada por guardas corrompidos.</p>
-    <p>Descobrem que os soldados de elite são quimeras de lodo, camufladas com armaduras cerimoniais.</p>
-    <p>Após derrotá-los, descobrem uma arena ritualística no centro da cidade — que, assim como Fausto, é na verdade um estômago abissal disfarçado.</p>
+        <p>Os heróis escapam por uma distorção e acordam em uma versão passada da própria Aethel.</p>
 
-    <p><strong>➤ Parte 2: O Ritual da Arena</strong></p>
-    <p>Por tradição local, qualquer estrangeiro que pisa na arena deve lutar em combate ritualístico.</p>
-    <p>Cada jogador enfrenta uma criatura ou campeão:</p>
-    <ul>
-      <li>Arabella e Eleonor vencem facilmente.</li>
-      <li>Zarkov sofre, mas triunfa.</li>
-      <li>Kaguya vence por pouco.</li>
-      <li>Toriel, surpreendentemente, derrota um dragão gigante.</li>
-      <li>Elisya aparentemente morre… mas se levanta misteriosamente.</li>
-      <li>Mahrez enfrenta uma criatura poderosa, mas no final vê Izack observando do alto da arena.</li>
-    </ul>
+        <p>Percebem que estão nos corpos de seus ancestrais.</p>
+      </section>
 
-    <p><strong>➤ Parte 3: A Última Quimera</strong></p>
-    <p>Izack ativa o verdadeiro propósito da arena: invocar a Última Quimera, um cardeal demoníaco com chifres, tridente e múltiplas vozes suplicando por perdão.</p>
-    <p>Uma luta brutal se segue. A criatura é derrotada.</p>
-    <p>Ao final, uma tumba de areia emerge do chão, com uma urna ritualística que suga Mahrez para dentro.</p>
+      <section id="arco3" tabindex="0" role="tabpanel" aria-labelledby="arco3-tab">
+        <h1>❄️ Arco 3 – Jogos de Inverno</h1>
 
-    <p><strong>➤ Parte 4: Nakhir e o Destino de Mahrez</strong></p>
-    <blockquote>“Agora teu sopro pertence à eternidade.”</blockquote>
-    <p>Mahrez retorna com seus pulmões substituídos por areia viva — punição permanente por sua sanidade corrompida.</p>
+        <h3>Sessão 1 – Boas-Vindas aos Condenados</h3>
 
-    <hr>
+        <p><strong>➤ Parte 1: A Jornada à Arábia</strong></p>
+        <p>O grupo, após reunir os heróis restantes Arabella e Eleonor, é enviado com urgência para a Arábia, terra natal de Mahrez, agora tomada por guardas corrompidos.</p>
+        <p>Descobrem que os soldados de elite são quimeras de lodo, camufladas com armaduras cerimoniais.</p>
+        <p>Após derrotá-los, descobrem uma arena ritualística no centro da cidade — que, assim como Fausto, é na verdade um estômago abissal disfarçado.</p>
 
-    <h3>Sessão 2 – Boas-Vindas aos Condenados (continuação)</h3>
-    <p>Mahrez e o grupo seguem para encontrar o pai dele, mas o encontram possuído pela entidade "O Príncipe".</p>
-    <p>O Príncipe os desafia para um jogo macabro de Verdade ou Desafio, com testes que drenam sanidade.</p>
-    <p>Após vencerem o jogo, Nakhir força Mahrez a comer o coração do pai como rito final.</p>
-    <p>Uma luta violenta acontece — Mahrez confronta o próprio pai possuído.</p>
-    <p>Ao fim, vencem a entidade.</p>
+        <p><strong>➤ Parte 2: O Ritual da Arena</strong></p>
+        <p>Por tradição local, qualquer estrangeiro que pisa na arena deve lutar em combate ritualístico.</p>
+        <p>Cada jogador enfrenta uma criatura ou campeão:</p>
+        <ul>
+          <li>Arabella e Eleonor vencem facilmente.</li>
+          <li>Zarkov sofre, mas triunfa.</li>
+          <li>Kaguya vence por pouco.</li>
+          <li>Toriel, surpreendentemente, derrota um dragão gigante.</li>
+          <li>Elisya aparentemente morre… mas se levanta misteriosamente.</li>
+          <li>Mahrez enfrenta uma criatura poderosa, mas no final vê Izack observando do alto da arena.</li>
+        </ul>
 
-    <p><strong>➤ Retorno a Aethel</strong></p>
-    <p>O grupo encontra um convite misterioso para retornar a Aethel.</p>
-    <p>Usam uniformes falsos da academia Bayat al Nar para entrar disfarçados como alunos de intercâmbio.</p>
-    <p>Toriel gasta toda sua mana para abrir um portal até Belém, onde Aethel está localizada.</p>
-    <p>Hospedam-se em uma taverna.</p>
-    <p>No dia seguinte, correm até Aethel para a cerimônia de boas-vindas.</p>
-    <p>Encontram Izack como o novo Reitor, ao lado da Trupe dos Sete Espinhos.</p>
+        <p><strong>➤ Parte 3: A Última Quimera</strong></p>
+        <p>Izack ativa o verdadeiro propósito da arena: invocar a Última Quimera, um cardeal demoníaco com chifres, tridente e múltiplas vozes suplicando por perdão.</p>
+        <p>Uma luta brutal se segue. A criatura é derrotada.</p>
+        <p>Ao final, uma tumba de areia emerge do chão, com uma urna ritualística que suga Mahrez para dentro.</p>
 
-    <blockquote>Izack, sorrindo diante da multidão, ergue um papel e diz: “Boas-vindas... a todos.” (Fim da sessão)</blockquote>
+        <p><strong>➤ Parte 4: Nakhir e o Destino de Mahrez</strong></p>
+        <blockquote>“Agora teu sopro pertence à eternidade.”</blockquote>
+        <p>Mahrez retorna com seus pulmões substituídos por areia viva — punição permanente por sua sanidade corrompida.</p>
 
-    <hr>
+        <hr>
 
-    <h3>Sessão 3 – Luta de Egos</h3>
-    <ul>
-      <li>Discurso oficial de Izack.</li>
-      <li>Sarthan, líder da Trupe, faz o discurso explicando os Jogos de Inverno.</li>
-      <li>Tensão entre Toriel e Sarthan — revelado que ele é noivo da irmã de Toriel.</li>
-      <li>Arabella discute com Sarthan e entra em atrito com Kaguya.</li>
-      <li>Ao final, recebem um panfleto explicando a Semana da Sabedoria — terão 1 mês para se preparar.</li>
-      <li>Kaguya, dominada pela espada, ataca os aliados, sugando sangue.</li>
-      <li>Elisya é tomada pelo Grimório. Zarkov entra em fúria.</li>
-      <li>Mahrez é possuído por Nakhir — luta brutal contra Arabella e Kaguya, que o derrota perfurando seu olho esquerdo (trauma permanente).</li>
-      <li>O grupo volta para a taverna. Tensão entre Mahrez e Arabella.</li>
-    </ul>
+        <h3>Sessão 2 – Boas-Vindas aos Condenados (continuação)</h3>
+        <p>Mahrez e o grupo seguem para encontrar o pai dele, mas o encontram possuído pela entidade "O Príncipe".</p>
+        <p>O Príncipe os desafia para um jogo macabro de Verdade ou Desafio, com testes que drenam sanidade.</p>
+        <p>Após vencerem o jogo, Nakhir força Mahrez a comer o coração do pai como rito final.</p>
+        <p>Uma luta violenta acontece — Mahrez confronta o próprio pai possuído.</p>
+        <p>Ao fim, vencem a entidade.</p>
 
-    <p><strong>➤ Parte 4: Nakhir e o Destino de Mahrez</strong></p>
-    <blockquote>“Agora teu sopro pertence à eternidade.”</blockquote>
-    <p>Mahrez retorna com seus pulmões substituídos por areia viva — punição permanente por sua sanidade corrompida.</p>
+        <p><strong>➤ Retorno a Aethel</strong></p>
+        <p>O grupo encontra um convite misterioso para retornar a Aethel.</p>
+        <p>Usam uniformes falsos da academia Bayat al Nar para entrar disfarçados como alunos de intercâmbio.</p>
+        <p>Toriel gasta toda sua mana para abrir um portal até Belém, onde Aethel está localizada.</p>
+        <p>Hospedam-se em uma taverna.</p>
+        <p>No dia seguinte, correm até Aethel para a cerimônia de boas-vindas.</p>
+        <p>Encontram Izack como o novo Reitor, ao lado da Trupe dos Sete Espinhos.</p>
 
-    <hr>
+        <blockquote>Izack, sorrindo diante da multidão, ergue um papel e diz: “Boas-vindas... a todos.” (Fim da sessão)</blockquote>
 
-    <p>No dia seguinte, recebem panfletos com atividades da Semana da Sabedoria, conhecem os quartos e colegas.</p>
-    <p>Arabella e Kaguya veem uma goblin criança saindo da biblioteca trancada, dizendo:</p>
-    <blockquote>“A carne da biblioteca ainda respira... Os livros sussurram nomes. Mas não os leia em voz alta... senão eles descem da prateleira... e não voltam sozinhos.”</blockquote>
+        <hr>
 
-    <p>(Fim da sessão)</p>
-  </section>
-</main>
+        <h3>Sessão 3 – Luta de Egos</h3>
+        <ul>
+          <li>Discurso oficial de Izack.</li>
+          <li>Sarthan, líder da Trupe, faz o discurso explicando os Jogos de Inverno.</li>
+          <li>Tensão entre Toriel e Sarthan — revelado que ele é noivo da irmã de Toriel.</li>
+          <li>Arabella discute com Sarthan e entra em atrito com Kaguya.</li>
+          <li>Ao final, recebem um panfleto explicando a Semana da Sabedoria — terão 1 mês para se
 
-<script>
-  const buttons = document.querySelectorAll('nav button');
-  const sections = document.querySelectorAll('main section');
-
-  buttons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      if(btn.classList.contains('active')) return;
-
-      // Remove active classes
-      buttons.forEach(b => b.classList.remove('active'));
-      sections.forEach(s => s.classList.remove('active'));
-
-      // Add active
-      btn.classList.add('active');
-      document.getElementById(btn.dataset.tab).classList.add('active');
-      // Foco para acessibilidade
-      document.getElementById(btn.dataset.tab).focus();
-    });
-  });
-</script>
-
-</body>
-</html>
