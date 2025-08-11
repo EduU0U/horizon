@@ -368,12 +368,26 @@
 
   <section id="toriel" tabindex="0" aria-label="Personagem Toriel Lionheart">
     <h1>Toriel Lionheart</h1>
-    <p>Filho do rei do Brasil, nascido em 1483, acusado injustamente do assassinato do reitor. Toriel é um estudante misterioso com uma história sinistra envolvendo traições e segredos da academia.</p>
+    <p><strong>Nome:</strong> Toriel Lionheart</p>
+    <p><strong>Nascimento:</strong> 6 de janeiro de 1483</p>
+    <p><strong>Origem:</strong> Filho do rei Lucius V Lionheart, terceiro na linha de sucessão ao trono do Brasil.</p>
+    <p><strong>Família:</strong> Irmão do príncipe herdeiro Melchior Lionheart e da princesa Cassandra Lionheart.</p>
+    <p><strong>Histórico:</strong> Toriel foi acusado injustamente do assassinato do reitor da Academia Aethel, junto com Mahrez, Elisya e Kaguya. Após a acusação, fugiu da academia e se tornou um personagem complexo, marcado por mistérios e um destino sombrio.</p>
+    <blockquote>
+      <p>"Sempre à sombra do trono, Toriel carrega o peso da culpa que não cometeu, lutando contra a injustiça enquanto busca a verdade por trás da traição que abalou Aethel."</p>
+    </blockquote>
+    <p><strong>Características:</strong></p>
+    <ul>
+      <li>Determinado e corajoso, apesar das adversidades.</li>
+      <li>Possui habilidades notáveis em combate e magia arcana.</li>
+      <li>Carrega uma profunda ligação com os segredos da academia.</li>
+      <li>Seus objetivos são nebulosos, deixando os aliados sempre em dúvida sobre suas reais intenções.</li>
+    </ul>
+    <p><strong>Atuação na campanha:</strong> Toriel é um NPC que pode atuar como aliado, antagonista ou figura enigmática, dependendo das decisões dos jogadores e da evolução da história.</p>
   </section>
 
-  <!-- Seção principal dos Lordes Demoníacos -->
   <section id="lordes" tabindex="0" aria-label="Nove Lordes Demoníacos">
-    <h1>Os Nove Lordes Demoníacos</h1>
+    <h1>Lordes Demoníacos</h1>
     <p>Conheça os poderosos Lordes que ameaçam o equilíbrio do mundo de Aethel. Clique nos ícones à direita para saber mais.</p>
 
     <!-- Conteúdo individual de cada Lorde - só um aparece por vez -->
@@ -424,7 +438,6 @@
       </article>
     </div>
   </section>
-
 </main>
 
 <script>
@@ -447,11 +460,11 @@
         tabSection.focus();
       }
 
-      // Se ativou 'lordes', por garantia ativa o primeiro lord na barra direita
-      if(tabId === 'lordes') {
+      // Se ativou 'lordes', ativa o primeiro lord na barra direita
+      if (tabId === 'lordes') {
         activateLord('malthazor');
       } else {
-        // Se não estiver na aba lordes, remove a ativação dos lordes na barra direita e no conteúdo
+        // Se não estiver na aba lordes, remove ativação dos lordes na barra direita e no conteúdo
         rightButtons.forEach(btn => btn.classList.remove('active'));
         lordDetails.forEach(ld => ld.classList.remove('active'));
       }
@@ -469,7 +482,7 @@
     const btn = document.querySelector(`.sidebar-right-btn[data-lord="${lordId}"]`);
     const detail = document.getElementById(lordId);
 
-    if(btn && detail) {
+    if (btn && detail) {
       btn.classList.add('active');
       detail.classList.add('active');
       detail.focus();
