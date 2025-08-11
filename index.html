@@ -4,16 +4,24 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Lore da Academia Aethel</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Open+Sans&display=swap" rel="stylesheet" />
+
 <style>
   /* Reset */
   *, *::before, *::after {
     box-sizing: border-box;
   }
+
+  /* Fundo com textura sutil e cor base */
   body {
     margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #121212;
+    background: 
+      url('https://www.transparenttextures.com/patterns/dark-mosaic.png') repeat,
+      #121212;
     color: #eee;
+    font-family: 'Open Sans', sans-serif;
     line-height: 1.5;
     display: flex;
     min-height: 100vh;
@@ -39,7 +47,7 @@
     font-size: 1.8rem;
     margin: 0.8rem 0;
     cursor: pointer;
-    transition: 0.3s;
+    transition: color 0.3s, transform 0.3s;
     position: relative;
   }
   .sidebar button:hover {
@@ -63,24 +71,31 @@
     transition: opacity 0.2s;
     border: 1px solid #550000aa;
     border-radius: 4px;
+    box-shadow: 0 0 8px #550000aa;
+    top: 50%;
+    transform: translateY(-50%);
   }
   .sidebar button:hover::after {
     opacity: 1;
   }
 
+  /* Header fixo */
   header {
     position: fixed;
     top: 0; left: 70px; right: 0;
     background: #1a1a1a;
     padding: 1rem;
     text-align: center;
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: 700;
     color: #ff4444;
-    text-shadow: 0 0 8px #aa0000;
+    text-shadow: 0 0 10px #aa0000;
+    font-family: 'Cinzel', serif;
     z-index: 10;
+    user-select: none;
   }
 
+  /* Main container */
   main {
     margin-left: 70px;
     margin-top: 5rem;
@@ -89,6 +104,7 @@
     max-width: 900px;
   }
 
+  /* Nav interna */
   nav {
     display: flex;
     justify-content: center;
@@ -104,8 +120,10 @@
     cursor: pointer;
     font-weight: 700;
     border-radius: 25px;
-    transition: 0.3s;
+    transition: background-color 0.3s, color 0.3s;
     user-select: none;
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
   }
   nav button:hover:not(.active) {
     background: #ff4444;
@@ -117,31 +135,82 @@
     cursor: default;
   }
 
+  /* Seções estilizadas como cards */
   section {
     display: none;
-    animation: fadeIn 0.5s ease forwards;
+    background: #1a1a1a;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 0 15px #550000aa;
+    margin-bottom: 2rem;
+    animation: fadeSlideIn 0.5s ease forwards;
+    outline-offset: -8px;
   }
   section.active {
     display: block;
   }
 
-  /* Toriel - fundo verde */
-  .toriel {
-    background: #1d2a1d;
-    border-left: 6px solid #44ff44aa;
-    box-shadow: 0 0 15px #44ff4499;
-    padding: 1.5rem;
-    border-radius: 8px;
-  }
-  .toriel h1, .toriel h2, .toriel h3 {
-    color: #88ff88;
-    text-shadow: 0 0 6px #00aa00aa;
-  }
-  .toriel blockquote {
-    border-left: 4px solid #44ff44;
-    color: #bbffbb;
+  /* Animação fade + slide */
+  @keyframes fadeSlideIn {
+    from {
+      opacity: 0;
+      transform: translateY(15px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
+  /* Títulos */
+  h1, h2, h3 {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    color: #ff6666;
+    text-shadow: 0 0 8px #660000aa;
+    margin-top: 0;
+  }
+
+  /* Ícones antes de itens da lista */
+  ul li {
+    margin-bottom: 0.5rem;
+    position: relative;
+    padding-left: 1.4rem;
+  }
+  ul li::before {
+    content: "✦";
+    position: absolute;
+    left: 0;
+    color: #ff4444;
+  }
+
+  /* Parágrafos */
+  p {
+    margin-bottom: 1rem;
+  }
+
+  /* Blockquotes melhorados */
+  blockquote {
+    border-left: 6px solid #ff4444;
+    background: #33000022;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    font-style: italic;
+    color: #ff6666;
+    box-shadow: 0 0 10px #ff4444aa;
+    margin: 1.5rem 0;
+    user-select: text;
+  }
+
+  /* HR customizado */
+  hr {
+    border: none;
+    height: 1px;
+    background: #550000aa;
+    margin: 1.5rem 0;
+  }
+
+  /* Imagem Toriel com borda e sombra */
   .toriel-img {
     display: block;
     max-width: 300px;
@@ -149,33 +218,28 @@
     height: auto;
     margin: 1rem auto 2rem auto;
     border-radius: 10px;
-    box-shadow: 0 0 15px #44ff4499;
-    border: 2px solid #44ff44aa;
+    border: 3px solid #ff4444;
+    box-shadow: 0 0 20px #ff4444cc;
   }
 
-  h1, h2, h3 {
-    color: #ff6666;
-    text-shadow: 0 0 6px #660000aa;
+  /* Seção Toriel com fundo verde escuro */
+  .toriel {
+    background: #1d2a1d;
+    border-left: 6px solid #44ff44aa;
+    box-shadow: 0 0 15px #44ff4499;
+    padding: 2rem;
+    border-radius: 12px;
+    color: #bbffbb;
   }
-  hr {
-    border: none;
-    height: 1px;
-    background: #550000aa;
-    margin: 1.5rem 0;
+  .toriel h1, .toriel h2, .toriel h3 {
+    color: #88ff88;
+    text-shadow: 0 0 8px #00aa00cc;
   }
-  ul {
-    margin-left: 1.2rem;
-    margin-bottom: 1.5rem;
-  }
-  p {
-    margin-bottom: 1rem;
-  }
-  blockquote {
-    border-left: 4px solid #ff4444;
-    margin: 1rem 0 1.5rem 0;
-    padding-left: 1rem;
-    font-style: italic;
-    color: #ff9999;
+  .toriel blockquote {
+    border-left: 6px solid #44ff44;
+    background: #11331144;
+    color: #bbffbb;
+    box-shadow: 0 0 10px #44ff44bb;
   }
 
   /* Scrollbar custom */
@@ -188,11 +252,6 @@
   ::-webkit-scrollbar-thumb {
     background: #660000;
     border-radius: 5px;
-  }
-
-  @keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
   }
 
   /* Responsivo */
@@ -212,11 +271,24 @@
     }
     header {
       left: 50px;
+      font-size: 1.6rem;
+      padding: 0.8rem;
     }
     main {
       margin-left: 50px;
       padding: 1rem;
+      max-width: 100%;
     }
+  }
+
+  /* Footer simples */
+  footer {
+    text-align: center;
+    padding: 1rem;
+    color: #660000aa;
+    font-size: 0.9rem;
+    font-family: 'Cinzel', serif;
+    user-select: none;
   }
 </style>
 </head>
@@ -338,101 +410,94 @@
     <h3>Sessão 3 – Luta de Egos</h3>
     <ul>
       <li>Discurso oficial de Izack.</li>
-      <li>Sarthan, líder da Trupe, faz o discurso explicando os Jogos de Inverno.</li>
-      <li>Tensão entre Toriel e Sarthan — revelado que ele é noivo da irmã de Toriel.</li>
-      <li>Arabella discute com Sarthan e entra em atrito com Kaguya.</li>
-      <li>Ao final, recebem um panfleto explicando a Semana da Sabedoria — terão 1 mês para se preparar.</li>
-      <li>Kaguya, dominada pela espada, ataca os aliados, sugando sangue.</li>
-      <li>Elisya é tomada pelo Grimório. Zarkov entra em fúria.</li>
-      <li>Mahrez é possuído por Nakhir — luta brutal contra Arabella e Kaguya, que o derrota perfurando seu olho esquerdo (trauma permanente).</li>
-      <li>O grupo volta para a taverna. Tensão entre Mahrez e Arabella.</li>
+      <li>Sarthan, líder da Trupe, faz o discurso da Trupe dos Sete Espinhos.</li>
+      <li>Primeira interação entre jogadores e antagonistas.</li>
+      <li>Manifestações perigosas dos itens heróicos dos jogadores.</li>
+      <li>Encontro com uma goblin sinistra na biblioteca.</li>
     </ul>
-
-    <p><strong>➤ Parte 4: Nakhir e o Destino de Mahrez</strong></p>
-    <blockquote>“Agora teu sopro pertence à eternidade.”</blockquote>
-    <p>Mahrez retorna com seus pulmões substituídos por areia viva — punição permanente por sua sanidade corrompida.</p>
-
-    <hr>
-
-    <p>No dia seguinte, recebem panfletos com atividades da Semana da Sabedoria, conhecem os quartos e colegas.</p>
-    <p>Arabella e Kaguya veem uma goblin criança saindo da biblioteca trancada, dizendo:</p>
-    <blockquote>“A carne da biblioteca ainda respira... Os livros sussurram nomes. Mas não os leia em voz alta... senão eles descem da prateleira... e não voltam sozinhos.”</blockquote>
-
-    <p>(Fim da sessão)</p>
   </section>
 
-  <!-- Personagem Toriel -->
-  <section id="toriel" tabindex="0" class="toriel" aria-label="Ficha do personagem Toriel Lionheart">
-    <h1>Toriel Lionheart — Lore Completa</h1>
+  <!-- Seção exclusiva: Toriel -->
+  <section id="toriel" tabindex="0" class="toriel" aria-label="Ficha e história do personagem Toriel Lionheart" style="display:none;">
+    <h1>👤 Toriel Lionheart</h1>
+    <img src="https://i.imgur.com/tXajPY6.png" alt="Imagem do personagem Toriel Lionheart" class="toriel-img" />
+    <h3>Informações básicas</h3>
+    <ul>
+      <li>Nome completo: Toriel Lionheart</li>
+      <li>Nascimento: 6 de janeiro de 1483</li>
+      <li>Filiação: Filho do rei Lucius V Lionheart</li>
+      <li>Posição na família: Terceiro na linhagem do trono, irmão do príncipe herdeiro Melchior Lionheart e da princesa Cassandra Lionheart</li>
+      <li>Status: Acusado injustamente de assassinar o reitor junto com Mahrez, Elisya e Kaguya</li>
+      <li>Personalidade: Determinada, estratégica e leal</li>
+    </ul>
 
-    <h3>Origem e Família</h3>
-    <p>Toriel Lionheart nasceu em <strong>6 de janeiro de 1483</strong>, terceiro na linha de sucessão ao trono do Brasil, governado pela poderosa dinastia Lionheart. Filho do rei <strong>Lucius V Lionheart</strong> e irmão do príncipe herdeiro <strong>Melchior</strong> e da princesa <strong>Cassandra</strong>, sempre foi o “patinho feio” da realeza.</p>
+    <h3>História resumida</h3>
+    <p>Toriel foi um dos estudantes mais promissores da Academia Aethel e integrante crucial dos heróis no mistério da morte do reitor. Acusado injustamente junto com seus companheiros, ele teve que fugir para sobreviver e tentar provar sua inocência.</p>
+    <p>Durante a jornada, descobriu segredos obscuros sobre a própria academia, seus ancestrais e o pacto sombrio envolvendo Izack e a Trupe dos Sete Espinhos.</p>
 
-    <img src="toriel.webp" alt="Toriel Lionheart" class="toriel-img" />
+    <blockquote>“Mesmo cercado pela sombra da traição, mantenho a chama da justiça acesa em meu peito.”</blockquote>
 
-    <h3>Personalidade e Aparência</h3>
-    <p>Magro, com olhos intensos e cabelos negros, Toriel tem uma postura séria, mas carrega uma chama interior de rebeldia. Sua expressão frequentemente mostra cansaço, fruto das pressões do palácio e da traição que sofreu.</p>
+    <h3>Aparência e estilo</h3>
+    <p>Toriel é um jovem alto, de cabelos castanhos escuros e olhos penetrantes. Usa uma armadura leve ornamentada com detalhes em ouro e rubis, refletindo sua nobre origem e treinamento rigoroso na academia.</p>
 
-    <h3>Acusações e Fuga</h3>
-    <p>Acusado injustamente de participar do assassinato do Reitor da Academia Aethel junto com Mahrez, Elisya e Kaguya, Toriel foi forçado a fugir, deixando para trás sua família e seu título real.</p>
-
-    <h3>Habilidades e Alianças</h3>
-    <p>Durante a fuga, Toriel desenvolveu habilidades mágicas únicas, com especial foco em manipulação de mana e combate corpo a corpo. Ele formou laços com outros fugitivos, incluindo os protagonistas do RPG, unindo forças para derrubar Izack e revelar a verdade por trás da traição.</p>
-
-    <h3>Motivações e Conflitos</h3>
-    <p>Além de limpar seu nome, Toriel luta contra seu próprio sentimento de abandono pela família e pela coroa. Sua ambição é recuperar a honra dos Lionheart e proteger aqueles que ama, mesmo que para isso precise andar na linha tênue entre a justiça e a vingança.</p>
+    <h3>Habilidades e magias</h3>
+    <ul>
+      <li>Especialista em combate com espada leve</li>
+      <li>Uso moderado de magia de defesa e manipulação de mana</li>
+      <li>Alta resistência física e mental</li>
+      <li>Capacidade de liderança e comando em batalhas</li>
+    </ul>
   </section>
 </main>
 
+<footer>
+  © 2025 Academia Aethel • Projeto RPG Midnight Gospel
+</footer>
+
 <script>
-  // Controle das abas laterais
+  // Troca de abas principais (Arcos + Toriel)
   const sidebarButtons = document.querySelectorAll('.sidebar-btn');
-  const sections = document.querySelectorAll('section');
+  const mainSections = document.querySelectorAll('main > section');
+  const navButtons = document.querySelectorAll('nav .tab-btn');
+
+  // Função para ativar seção sidebar
+  function activateSidebarTab(tab) {
+    sidebarButtons.forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.tab === tab);
+    });
+    mainSections.forEach(sec => {
+      sec.classList.toggle('active', sec.id === tab);
+      if (sec.id === tab) {
+        sec.style.display = 'block';
+        sec.focus();
+      } else {
+        sec.style.display = 'none';
+      }
+    });
+    // Se a aba for arco, atualiza também nav
+    if (tab.startsWith('arco')) {
+      navButtons.forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.tab === tab);
+      });
+    }
+  }
 
   sidebarButtons.forEach(btn => {
     btn.addEventListener('click', () => {
-      sidebarButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      const target = btn.getAttribute('data-tab');
-
-      sections.forEach(sec => {
-        if (sec.id === target) {
-          sec.classList.add('active');
-          sec.focus();
-        } else {
-          sec.classList.remove('active');
-        }
-      });
+      activateSidebarTab(btn.dataset.tab);
     });
   });
 
-  // Controle das abas internas (arcos)
-  const tabButtons = document.querySelectorAll('nav .tab-btn');
-  const arcoSections = ['arco1', 'arco2', 'arco3'];
-
-  tabButtons.forEach(btn => {
+  // Troca de abas nav (arcos)
+  navButtons.forEach(btn => {
     btn.addEventListener('click', () => {
-      tabButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      const target = btn.getAttribute('data-tab');
-
-      arcoSections.forEach(id => {
-        const sec = document.getElementById(id);
-        if (id === target) {
-          sec.classList.add('active');
-          sec.focus();
-        } else {
-          sec.classList.remove('active');
-        }
-      });
+      activateSidebarTab(btn.dataset.tab);
     });
   });
+
+  // Inicializa com Arco 1 ativo
+  activateSidebarTab('arco1');
 </script>
 
 </body>
 </html>
-
-
-
