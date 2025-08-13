@@ -1,603 +1,164 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Lore da Academia Aethel</title>
-
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Open+Sans&display=swap" rel="stylesheet" />
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crônicas da Campanha</title>
 <style>
-  /* Reset */
-  *, *::before, *::after {
-    box-sizing: border-box;
-  }
-
-  /* Fundo com textura sutil e cor base */
-  body {
-    margin: 0;
-    background: 
-      url('https://www.transparenttextures.com/patterns/dark-mosaic.png') repeat,
-      #121212;
-    color: #eee;
-    font-family: 'Open Sans', sans-serif;
-    line-height: 1.5;
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-  }
-
-  /* Container para conteúdo principal */
-  .content-wrapper {
-    flex: 1;
-    display: flex;
-    overflow: hidden;
-  }
-
-  /* Barra lateral esquerda */
-  .sidebar {
-    position: fixed;
-    top: 0; left: 0;
-    width: 70px; height: 100vh;
-    background: linear-gradient(180deg, #1a1a1a, #141414);
-    border-right: 2px solid #550000aa;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 1rem;
-    z-index: 20;
-  }
-  .sidebar button {
-    background: none;
-    border: none;
-    color: #ff6666;
-    font-size: 1.8rem;
-    margin: 0.8rem 0;
-    cursor: pointer;
-    transition: color 0.3s, transform 0.3s;
-    position: relative;
-  }
-  .sidebar button:hover {
-    color: #fff;
-    transform: scale(1.3);
-  }
-  .sidebar button.active {
-    color: #44ff44;
-    transform: scale(1.4);
-  }
-  .sidebar button::after {
-    content: attr(title);
-    position: absolute;
-    left: 60px;
-    background: #1a1a1a;
-    padding: 0.3rem 0.6rem;
-    font-size: 0.85rem;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s;
-    border: 1px solid #550000aa;
-    border-radius: 4px;
-    box-shadow: 0 0 8px #550000aa;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  .sidebar button:hover::after {
-    opacity: 1;
-  }
-
-  /* Barra lateral direita para Lordes Demoníacos */
-  .sidebar-right {
-    position: fixed;
-    top: 0; right: 0;
-    width: 80px; height: 100vh;
-    background: linear-gradient(180deg, #1a1a1a, #141414);
-    border-left: 2px solid #550000aa;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1rem 0;
-    gap: 1rem;
-    z-index: 20;
-  }
-  .sidebar-right button {
-    background: none;
-    border: none;
-    padding: 0;
-    width: 56px;
-    height: 56px;
-    cursor: pointer;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 0 6px #66000088;
-    transition: box-shadow 0.3s, transform 0.3s;
-  }
-  .sidebar-right button img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    filter: grayscale(80%);
-    transition: filter 0.3s;
-  }
-  .sidebar-right button:hover img {
-    filter: grayscale(0%);
-  }
-  .sidebar-right button.active {
-    box-shadow: 0 0 15px #ff4444;
-    transform: scale(1.15);
-  }
-
-  /* Header fixo */
-  header {
-    position: fixed;
-    top: 0; left: 70px; right: 80px;
-    background: #1a1a1a;
-    padding: 1rem;
-    text-align: center;
-    font-size: 2rem;
-    font-weight: 700;
-    color: #ff4444;
-    text-shadow: 0 0 10px #aa0000;
-    font-family: 'Cinzel', serif;
-    z-index: 10;
-    user-select: none;
-  }
-
-  /* Main container */
-  main {
-    margin-left: 70px;
-    margin-right: 80px;
-    margin-top: 5rem;
-    padding: 2rem;
-    flex-grow: 1;
-    max-width: 900px;
-    overflow-y: auto;
-    outline-offset: -8px;
-  }
-
-  /* Nav interna */
-  nav {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-    flex-wrap: wrap;
-  }
-  nav button {
-    background: transparent;
-    border: 2px solid #ff4444;
-    color: #ff4444;
-    padding: 0.5rem 1.5rem;
-    cursor: pointer;
-    font-weight: 700;
-    border-radius: 25px;
-    transition: background-color 0.3s, color 0.3s;
-    user-select: none;
-    font-family: 'Cinzel', serif;
-    font-size: 1rem;
-  }
-  nav button:hover:not(.active) {
-    background: #ff4444;
-    color: #121212;
-  }
-  nav button.active {
-    background: #ff4444;
-    color: #121212;
-    cursor: default;
-  }
-
-  /* Seções estilizadas como cards */
-  section {
-    display: none;
-    background: #1a1a1a;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 0 15px #550000aa;
-    margin-bottom: 2rem;
-    animation: fadeSlideIn 0.5s ease forwards;
-  }
-  section.active {
-    display: block;
-  }
-
-  /* Animação fade + slide */
-  @keyframes fadeSlideIn {
-    from {
-      opacity: 0;
-      transform: translateY(15px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  /* Títulos */
-  h1, h2, h3 {
-    font-family: 'Cinzel', serif;
-    font-weight: 700;
-    color: #ff6666;
-    text-shadow: 0 0 8px #660000aa;
-    margin-top: 0;
-  }
-
-  /* Ícones antes de itens da lista */
-  ul li {
-    margin-bottom: 0.5rem;
-    position: relative;
-    padding-left: 1.4rem;
-  }
-  ul li::before {
-    content: "✦";
-    position: absolute;
-    left: 0;
-    color: #ff4444;
-  }
-
-  /* Parágrafos */
-  p {
-    margin-bottom: 1rem;
-  }
-
-  /* Blockquotes melhorados */
-  blockquote {
-    border-left: 6px solid #ff4444;
-    background: #33000022;
-    padding: 1rem 1.5rem;
-    border-radius: 8px;
-    font-style: italic;
-    color: #ff6666;
-    box-shadow: 0 0 10px #ff4444aa;
-    margin: 1.5rem 0;
-    user-select: text;
-  }
-
-  /* HR customizado */
-  hr {
-    border: none;
-    height: 1px;
-    background: #550000aa;
-    margin: 1.5rem 0;
-  }
-
-  /* Imagem Toriel com borda e sombra */
-  .toriel-img {
-    display: block;
-    max-width: 300px;
-    width: 100%;
-    height: auto;
-    margin: 1rem auto 2rem auto;
-    border-radius: 10px;
-    border: 3px solid #44ff44;
-    box-shadow: 0 0 20px #44ff44cc;
-  }
-
-  /* Seção Toriel com fundo verde escuro */
-  .toriel {
-    background: #1d2a1d;
-    border-left: 6px solid #44ff44aa;
-    box-shadow: 0 0 15px #44ff4499;
-    padding: 2rem;
-    border-radius: 12px;
-    color: #bbffbb;
-  }
-  .toriel h1, .toriel h2, .toriel h3 {
-    color: #88ff88;
-    text-shadow: 0 0 8px #00aa00cc;
-  }
-  .toriel blockquote {
-    border-left: 6px solid #44ff44;
-    background: #11331144;
-    color: #bbffbb;
-    box-shadow: 0 0 10px #44ff44bb;
-  }
-
-  /* Scrollbar custom */
-  ::-webkit-scrollbar {
-    width: 10px;
-  }
-  ::-webkit-scrollbar-track {
-    background: #1a1a1a;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #660000;
-    border-radius: 5px;
-  }
-
-  /* Responsivo */
-  @media (max-width: 480px) {
-    nav {
-      gap: 0.5rem;
-    }
-    nav button {
-      padding: 0.5rem 1rem;
-      font-size: 0.9rem;
-    }
-    .sidebar {
-      width: 50px;
-    }
-    .sidebar button {
-      font-size: 1.5rem;
-    }
-    .sidebar-right {
-      display: none; /* Esconder a barra dos Lordes em mobile para espaço */
+    body {
+        font-family: 'Cinzel', serif;
+        background-color: #0d0d0d;
+        color: #e0e0e0;
+        margin: 0;
+        padding: 0;
     }
     header {
-      left: 50px;
-      right: 0;
-      font-size: 1.6rem;
-      padding: 0.8rem;
+        text-align: center;
+        padding: 20px;
+        background-color: #1a1a1a;
+        border-bottom: 2px solid #b30000;
     }
-    main {
-      margin-left: 50px;
-      margin-right: 0;
-      padding: 1rem;
-      max-width: 100%;
+    h1 {
+        margin: 0;
+        font-size: 2em;
+        color: #b30000;
     }
-  }
-
-  /* Footer simples */
-  footer {
-    text-align: center;
-    padding: 1rem;
-    color: #660000aa;
-    font-size: 0.9rem;
-    font-family: 'Cinzel', serif;
-    user-select: none;
-  }
+    .section {
+        padding: 20px;
+    }
+    .accordion {
+        background-color: #1a1a1a;
+        color: #e0e0e0;
+        cursor: pointer;
+        padding: 15px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 1.2em;
+        transition: 0.3s;
+        border-bottom: 1px solid #b30000;
+    }
+    .accordion:hover {
+        background-color: #262626;
+    }
+    .panel {
+        padding: 15px;
+        display: none;
+        background-color: #0f0f0f;
+        border-left: 3px solid #b30000;
+    }
+    .characters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        padding-top: 10px;
+    }
+    .character {
+        text-align: center;
+        cursor: pointer;
+        flex: 1 1 120px;
+    }
+    .character img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        border: 2px solid #b30000;
+        transition: transform 0.3s;
+    }
+    .character img:hover {
+        transform: scale(1.1);
+    }
+    .character-info {
+        display: none;
+        padding: 10px;
+        background-color: #0f0f0f;
+        border: 1px solid #b30000;
+        margin-top: 5px;
+    }
 </style>
 </head>
 <body>
 
-<!-- Barra lateral esquerda -->
-<div class="sidebar" role="navigation" aria-label="Menu lateral de personagens">
-  <button class="sidebar-btn active" data-tab="arco1" title="Arco 1 – Traição">🌑</button>
-  <button class="sidebar-btn" data-tab="arco2" title="Arco 2 – Quimeras">🩸</button>
-  <button class="sidebar-btn" data-tab="arco3" title="Arco 3 – Jogos de Inverno">❄️</button>
-  <button class="sidebar-btn" data-tab="toriel" title="Personagem: Toriel Lionheart">👤</button>
+<header>
+    <h1>Crônicas da Campanha</h1>
+</header>
+
+<div class="section">
+    <h2>Arcos</h2>
+    <button class="accordion">Arco 1 - Acusação e Fuga</button>
+    <div class="panel">
+        <p>Os heróis são injustamente acusados de assassinato, fugindo para Fausto e descobrindo que a cidade é uma armadilha criada por Izack.</p>
+    </div>
+
+    <button class="accordion">Arco 2 - Protocolo da Dor</button>
+    <div class="panel">
+        <p>Após enfrentarem a Legião Abissal e serem capturados, os heróis descobrem experimentos de quimeras e a ameaça da Última Quimera.</p>
+    </div>
+
+    <button class="accordion">Arco 3 - Jogos de Inverno</button>
+    <div class="panel">
+        <p>Infiltrados na Academia Bayat al Nar, os heróis competem em jogos ritualísticos, enfrentando a Trupe dos Sete Espinhos.</p>
+    </div>
 </div>
 
-<!-- Barra lateral direita: Nove Lordes Demoníacos -->
-<div class="sidebar-right" role="navigation" aria-label="Menu dos Nove Lordes Demoníacos">
-  <button class="lord-btn" data-lord="malthazor" title="Mal'Thazor, o Espreitador da Carne">
-    <img src="https://i.imgur.com/3j1QbLN.png" alt="Ícone de Mal'Thazor">
-  </button>
-  <button class="lord-btn" data-lord="vhoraketh" title="Vhor'Aketh, o Ceifador do Tempo Esquecido">
-    <img src="https://i.imgur.com/qkCOKqV.png" alt="Ícone de Vhor'Aketh">
-  </button>
-  <button class="lord-btn" data-lord="zennorkai" title="Zennor'Kai, o Riso Sepulcral">
-    <img src="https://i.imgur.com/EeK39Vf.png" alt="Ícone de Zennor'Kai">
-  </button>
-  <button class="lord-btn" data-lord="liranach" title="Lir'Anach, o Lamento dos Lares">
-    <img src="https://i.imgur.com/ZRUuBDV.png" alt="Ícone de Lir'Anach">
-  </button>
-  <button class="lord-btn" data-lord="ogrionthul" title="Ogrion'Thul, o Engolidor de Pactos">
-    <img src="https://i.imgur.com/BmsKgHs.png" alt="Ícone de Ogrion'Thul">
-  </button>
-  <button class="lord-btn" data-lord="baelvureth" title="Bael'Vureth, o Chacô do Sopro Final">
-    <img src="https://i.imgur.com/f0V7OYO.png" alt="Ícone de Bael'Vureth">
-  </button>
-  <button class="lord-btn" data-lord="syranom" title="Syra'Nom, a Mãe das Correntes">
-    <img src="https://i.imgur.com/3WJjP0Z.png" alt="Ícone de Syra'Nom">
-  </button>
-  <button class="lord-btn" data-lord="drethmur" title="Dreth'Mur, o Jantar dos Condenados">
-    <img src="https://i.imgur.com/8N6u6c9.png" alt="Ícone de Dreth'Mur">
-  </button>
-  <button class="lord-btn" data-lord="kzzarun" title="Kz'Zarun, o Dente da Terra Subversa">
-    <img src="https://i.imgur.com/AxXtfQi.png" alt="Ícone de Kz'Zarun">
-  </button>
+<div class="section">
+    <h2>Personagens</h2>
+    <div class="characters">
+        <div class="character" onclick="toggleInfo(this)">
+            <img src="https://via.placeholder.com/80" alt="Personagem 1">
+            <div class="character-info">
+                <strong>Nome:</strong> Raul<br>
+                <strong>Poderes:</strong> Mestre de armas pesadas<br>
+                <strong>Itens:</strong> Machado do Rio Sangrento
+            </div>
+        </div>
+        <div class="character" onclick="toggleInfo(this)">
+            <img src="https://via.placeholder.com/80" alt="Personagem 2">
+            <div class="character-info">
+                <strong>Nome:</strong> Mahrez<br>
+                <strong>Poderes:</strong> Controle de areia viva<br>
+                <strong>Itens:</strong> Urna de Nakhir
+            </div>
+        </div>
+        <div class="character" onclick="toggleInfo(this)">
+            <img src="https://via.placeholder.com/80" alt="Personagem 3">
+            <div class="character-info">
+                <strong>Nome:</strong> Clara<br>
+                <strong>Poderes:</strong> Invocadora de sombras<br>
+                <strong>Itens:</strong> Grimoire Abissal
+            </div>
+        </div>
+    </div>
 </div>
 
-<header>Lore da Academia Aethel</header>
+<div class="section">
+    <h2>Curiosidades</h2>
+    <button class="accordion">O que são as Antirrelíquias?</button>
+    <div class="panel">
+        <p>Artefatos criados para serem contramedidas perfeitas aos itens heróicos dos heróis.</p>
+    </div>
 
-<div class="content-wrapper">
-  <main>
-    <!-- Nav secundário (arcos) -->
-    <nav>
-      <button class="tab-btn active" data-tab="arco1">🌑 Arco 1 – Traição</button>
-      <button class="tab-btn" data-tab="arco2">🩸 Arco 2 – Quimeras</button>
-      <button class="tab-btn" data-tab="arco3">❄️ Arco 3 – Jogos de Inverno</button>
-    </nav>
-
-    <!-- Conteúdo dos Arcos -->
-    <section id="arco1" tabindex="0" class="active" aria-label="Conteúdo do Arco 1">
-      <h1>🌑 Arco 1 – Traição</h1>
-      <h3>Introdução:</h3>
-      <p>Os personagens são alunos recém-chegados à Academia Aethel, onde acabam se conhecendo ao seguir um misterioso tentáculo negro nos corredores da escola.</p>
-
-      <h3>Eventos principais:</h3>
-      <ul>
-        <li>O tentáculo os leva até a sala do reitor, onde testemunham Izack matando o Reitor de Aethel.</li>
-        <li>Izack desaparece, e os alunos são pegos ao lado do corpo. Toda a academia os vê como culpados.</li>
-        <li>Eles fogem e tornam-se procurados pelo reino.</li>
-        <li>Refugiam-se na cidade de Fausto, mas descobrem que é uma ilusão construída por Izack — um estômago mágico que consome pessoas através do medo, corpo e alma.</li>
-        <li>Escapam de Fausto, mas são interceptados pelo General Francesco Lionheart, tio de Toriel, que tenta prendê-los.</li>
-        <li>A Legião Abissal aparece (Homem Pálido, Cirurgião, Homem do Elmo), provocando uma batalha caótica.</li>
-        <li>Elise, uma integrante da Legião, salva os jogadores e os leva até um laboratório subterrâneo.</li>
-      </ul>
-    </section>
-
-    <section id="arco2" tabindex="0" aria-label="Conteúdo do Arco 2">
-      <h1>🩸 Arco 2 – Quimeras, Experimentos e Verdades Escondidas</h1>
-      <h3>Introdução:</h3>
-      <p>Os jogadores descobrem segredos obscuros sobre experimentos com quimeras e a verdadeira natureza da Academia.</p>
-
-      <h3>Eventos principais:</h3>
-      <ul>
-        <li>Descoberta do laboratório subterrâneo e seus horrores.</li>
-        <li>Encontro com Kaguya e pactos feitos com relíquias antigas.</li>
-        <li>Batalha contra membros da Legião Abissal e perda de Elise.</li>
-        <li>Viagem no tempo para uma versão passada da Academia.</li>
-        <li>Encontro com ancestrais e revelações de Aethel.</li>
-      </ul>
-    </section>
-
-    <section id="arco3" tabindex="0" aria-label="Conteúdo do Arco 3">
-      <h1>❄️ Arco 3 – Jogos de Inverno</h1>
-      <h3>Introdução:</h3>
-      <p>Os personagens estão infiltrados na Academia Bayat al Nar, participando de um torneio ritualístico enquanto enfrentam a Trupe dos Sete Espinhos.</p>
-
-      <h3>Eventos principais:</h3>
-      <ul>
-        <li>Disfarce como alunos de intercâmbio para obter uniformes.</li>
-        <li>Participação nos Jogos de Inverno e desafios brutais.</li>
-        <li>Interações tensas com a Trupe dos Sete Espinhos.</li>
-        <li>Punição permanente de Mahrez, substituindo seus pulmões por areia viva.</li>
-      </ul>
-    </section>
-
-    <!-- Seção exclusiva: Toriel -->
-    <section id="toriel" tabindex="0" class="toriel" aria-label="Ficha e história do personagem Toriel Lionheart">
-      <h1>👤 Toriel Lionheart</h1>
-      <img src="https://i.imgur.com/tXajPY6.png" alt="Imagem do personagem Toriel Lionheart" class="toriel-img" />
-      <h3>Informações básicas</h3>
-      <ul>
-        <li>Nome completo: Toriel Lionheart</li>
-        <li>Nascimento: 6 de janeiro de 1483</li>
-        <li>Filiação: Filho do rei Lucius V Lionheart</li>
-        <li>Posição na família: Terceiro na linhagem do trono, irmão do príncipe herdeiro Melchior Lionheart e da princesa Cassandra Lionheart</li>
-        <li>Status: Acusado injustamente de assassinar o reitor junto com Mahrez, Elisya e Kaguya</li>
-      </ul>
-
-      <h3>História</h3>
-      <p>Toriel Lionheart nasceu em um reino próspero, filho de uma dinastia real marcada por intrigas e traições. Cresceu sob a sombra do irmão mais velho, o príncipe Melchior, herdeiro do trono. Desde jovem, Toriel mostrou-se determinado, inteligente e dotado de grande carisma, o que o levou a ser admirado e temido em igual medida.</p>
-
-      <p>Aos 16 anos, durante um período turbulento, foi acusado falsamente de conspiração contra o reino. Para evitar um escândalo que pudesse desestabilizar a monarquia, seu pai, o rei Lucius V, o enviou para a Academia Aethel, onde acreditava-se que Toriel poderia ser moldado e reabilitado. Lá, Toriel destacou-se por seu talento natural em artes arcanas e estratégia, mas manteve sempre uma aura de mistério.</p>
-
-      <blockquote>"Eu não busco poder pela glória, mas pela justiça que nunca me foi dada."</blockquote>
-
-      <p>Durante os eventos trágicos da morte do reitor da Academia, Toriel foi acusado injustamente junto aos seus companheiros, o que levou a uma série de eventos que colocaram sua vida e honra em risco. Apesar disso, mantém-se firme em sua luta para provar sua inocência e proteger aqueles que ama.</p>
-
-      <h3>Características e habilidades</h3>
-      <ul>
-        <li>Intelecto aguçado e conhecimento avançado em magia de manipulação temporal.</li>
-        <li>Habilidades em combate corpo a corpo e uso de lâminas curtas.</li>
-        <li>Carisma elevado, capaz de liderar e influenciar grupos.</li>
-        <li>Resiliência mental, suportando pressão extrema sem perder a compostura.</li>
-      </ul>
-
-      <h3>Citações</h3>
-      <blockquote>"Mesmo no silêncio das sombras, a verdade encontra seu caminho."</blockquote>
-      <blockquote>"Nenhuma mentira pode resistir à luz da perseverança."</blockquote>
-    </section>
-
-    <!-- Seções dos Lordes Demoníacos -->
-    <section id="malthazor" aria-label="Mal'Thazor, o Espreitador da Carne">
-      <h1>Mal'Thazor, o Espreitador da Carne</h1>
-      <p>Mal'Thazor é um dos Nove Lordes Demoníacos, conhecido por sua fome insaciável e domínio sobre a carne viva e seus tormentos. Suas presenças menores são mantidas em formas grotescas até que sejam plenamente alimentadas para manifestar seu poder completo.</p>
-      <ul>
-        <li>Antirrelíquia: "Garras de Mal'Thazor" — uma arma que corrói a carne dos inimigos ao contato.</li>
-        <li>Comida favorita: Carne fresca de vítimas corrompidas.</li>
-      </ul>
-    </section>
-
-    <section id="vhoraketh" aria-label="Vhor'Aketh, o Ceifador do Tempo Esquecido">
-      <h1>Vhor'Aketh, o Ceifador do Tempo Esquecido</h1>
-      <p>Este lorde manipula o tempo, colhendo vidas no fluxo esquecido da existência. Seus pactos causam danos não apenas físicos, mas também à continuidade temporal dos seus inimigos.</p>
-    </section>
-
-    <section id="zennorkai" aria-label="Zennor'Kai, o Riso Sepulcral">
-      <h1>Zennor'Kai, o Riso Sepulcral</h1>
-      <p>Entidade que manipula a loucura e o desespero, provocando risadas macabras que enlouquecem seus adversários lentamente.</p>
-    </section>
-
-    <section id="liranach" aria-label="Lir'Anach, o Lamento dos Lares">
-      <h1>Lir'Anach, o Lamento dos Lares</h1>
-      <p>Assombra os lares, trazendo tristeza profunda e distorção emocional nas famílias, alimentando-se do sofrimento humano.</p>
-    </section>
-
-    <section id="ogrionthul" aria-label="Ogrion'Thul, o Engolidor de Pactos">
-      <h1>Ogrion'Thul, o Engolidor de Pactos</h1>
-      <p>Este lorde devora os pactos feitos com ele, consumindo a energia vital de seus servos quando estes falham em cumprir seus acordos.</p>
-    </section>
-
-    <section id="baelvureth" aria-label="Bael'Vureth, o Chacô do Sopro Final">
-      <h1>Bael'Vureth, o Chacô do Sopro Final</h1>
-      <p>Controla os ventos da morte, sua presença é precedida pelo silêncio da respiração final.</p>
-    </section>
-
-    <section id="syranom" aria-label="Syra'Nom, a Mãe das Correntes">
-      <h1>Syra'Nom, a Mãe das Correntes</h1>
-      <p>Manipula correntes e laços, prendendo almas e corpos em suas malhas infernais.</p>
-    </section>
-
-    <section id="drethmur" aria-label="Dreth'Mur, o Jantar dos Condenados">
-      <h1>Dreth'Mur, o Jantar dos Condenados</h1>
-      <p>Senhor dos banquetes macabros, alimenta-se da desgraça dos condenados eternos.</p>
-    </section>
-
-    <section id="kzzarun" aria-label="Kz'Zarun, o Dente da Terra Subversa">
-      <h1>Kz'Zarun, o Dente da Terra Subversa</h1>
-      <p>Representa a corrosão e a podridão do solo, desestabilizando o mundo físico e espiritual.</p>
-    </section>
-
-  </main>
+    <button class="accordion">Origem da Trupe dos Sete Espinhos</button>
+    <div class="panel">
+        <p>Cada membro representa uma ideologia distorcida, desde o colonialismo religioso até a eugenia científica.</p>
+    </div>
 </div>
-
-<footer>
-  Academia Aethel &copy; 2025 — Todos os direitos reservados.
-</footer>
 
 <script>
-  // Troca abas lado esquerdo (arcos + toriel)
-  const sidebarBtns = document.querySelectorAll('.sidebar-btn');
-  const tabBtns = document.querySelectorAll('nav .tab-btn');
-  const sections = document.querySelectorAll('main > section');
-
-  function activateTab(tabName) {
-    // Atualiza sidebar esquerda
-    sidebarBtns.forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.tab === tabName);
+    // Controle de arcos e curiosidades
+    document.querySelectorAll(".accordion").forEach(button => {
+        button.addEventListener("click", () => {
+            const panel = button.nextElementSibling;
+            panel.style.display = (panel.style.display === "block") ? "none" : "block";
+        });
     });
-    // Atualiza nav interna dos arcos (se for arco)
-    tabBtns.forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.tab === tabName);
-    });
-    // Mostra a seção correspondente, esconde as outras
-    sections.forEach(sec => {
-      sec.classList.toggle('active', sec.id === tabName);
-    });
-  }
 
-  sidebarBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      activateTab(btn.dataset.tab);
-    });
-  });
-
-  tabBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      activateTab(btn.dataset.tab);
-    });
-  });
-
-  // Troca abas Lordes Demoníacos na barra direita
-  const lordBtns = document.querySelectorAll('.lord-btn');
-  lordBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      // Remove active de todos lordes
-      lordBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      // Exibir só a seção do lorde clicado, esconder outras seções de lordes
-      sections.forEach(sec => {
-        // se for uma seção de lord demoníaco
-        if (sec.id && [...lordBtns].some(b => b.dataset.lord === sec.id)) {
-          sec.classList.toggle('active', sec.id === btn.dataset.lord);
-        }
-      });
-
-      // Tirar active das abas do lado esquerdo pra não confundir visualmente
-      sidebarBtns.forEach(btn => btn.classList.remove('active'));
-      tabBtns.forEach(btn => btn.classList.remove('active'));
-    });
-  });
-
-  // Por padrão, ativar a primeira lord (opcional: ativar nenhuma)
-  // lordBtns[0].classList.add('active');
-
+    // Controle de personagens
+    function toggleInfo(element) {
+        const info = element.querySelector(".character-info");
+        info.style.display = (info.style.display === "block") ? "none" : "block";
+    }
 </script>
 
 </body>
